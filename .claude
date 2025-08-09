@@ -1,0 +1,27 @@
+# ClipboardAppBeta - App Store Compliant Version
+
+## Project Overview
+A lightweight, App Store-compliant clipboard manager for macOS built with SwiftUI.
+
+## Key Features
+- Searchable clipboard history
+- Sticky notes tab
+- Customizable user-defined tabs
+- Clean, minimal interface
+- App Store compliance (no file downloads, no screenshots)
+
+## Development Environment
+- Xcode
+- SwiftUI for macOS
+- Target: macOS 12.0+
+
+## Project Status
+- Phase: Planning & Setup
+- Created: $(date)
+- Lead Developer: Seth Paonessa
+
+## Next Steps
+1. Review and approve project plan
+2. Set up Xcode project structure
+3. Implement core features
+4. App Store submission preparation
