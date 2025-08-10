@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 class NotesManager: ObservableObject {
+    static let shared = NotesManager()
     @Published var notes: [Note] = []
     
     init() {
@@ -17,7 +18,7 @@ class NotesManager: ObservableObject {
     
     func addNote(title: String, content: String, color: NoteColor = .yellow) {
         let newNote = Note(
-            title: title,
+            title: title.isEmpty ? "Untitled" : title,
             content: content,
             color: color
         )
@@ -55,20 +56,6 @@ class NotesManager: ObservableObject {
         if let data = UserDefaults.standard.data(forKey: "stickyNotes"),
            let decoded = try? JSONDecoder().decode([Note].self, from: data) {
             notes = decoded
-        } else {
-            // Add sample notes for demo
-            notes = [
-                Note(
-                    title: "Welcome to ClipboardApp",
-                    content: "Your menubar clipboard manager with sticky notes!",
-                    color: .yellow
-                ),
-                Note(
-                    title: "Features",
-                    content: "• Real-time clipboard monitoring\n• Sticky notes\n• Custom tabs\n• App Store ready",
-                    color: .blue
-                )
-            ]
         }
     }
     

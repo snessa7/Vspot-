@@ -34,7 +34,7 @@ struct MenuBarContentView: View {
                 case .clipboard:
                     ClipboardListView(searchText: searchText)
                 case .notes:
-                    NotesView()
+                    NotesView(searchText: searchText)
                 case .custom(let name):
                     CustomTabView(tabName: name)
                 }
