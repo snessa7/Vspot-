@@ -62,15 +62,6 @@ struct HeaderView: View {
             TabButton(title: "Notes", icon: "note.text", tab: .notes)
             
             Spacer()
-            
-            // Settings button
-            Button(action: {
-                // Open settings
-            }) {
-                Image(systemName: "gear")
-                    .foregroundColor(.secondary)
-            }
-            .buttonStyle(.plain)
         }
     }
 }

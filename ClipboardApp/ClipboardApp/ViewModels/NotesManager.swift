@@ -59,7 +59,7 @@ class NotesManager: ObservableObject {
         }
     }
     
-    private func saveNotes() {
+    public func saveNotes() {
         // Save to UserDefaults for now (will use Core Data later)
         if let encoded = try? JSONEncoder().encode(notes) {
             UserDefaults.standard.set(encoded, forKey: "stickyNotes")
