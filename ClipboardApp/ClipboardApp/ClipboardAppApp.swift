@@ -26,7 +26,7 @@ struct ClipboardAppApp: App {
         .commands {
             // Application menu
             CommandGroup(replacing: .appInfo) {
-                Button("About ClipboardApp") {
+                Button("About VSpot") {
                     appDelegate.showAbout()
                 }
             }
@@ -196,7 +196,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
             
             if let button = statusItem?.button {
-                button.image = NSImage(systemSymbolName: "v.circle.fill", accessibilityDescription: "ClipboardApp")
+                button.image = NSImage(systemSymbolName: "v.square.fill", accessibilityDescription: "VSpot ClipboardApp")
                 button.action = #selector(togglePopover)
                 button.target = self
                 button.sendAction(on: [.leftMouseUp, .rightMouseUp])
@@ -238,11 +238,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func showContextMenu(_ sender: NSStatusBarButton) {
         let menu = NSMenu()
         
-        menu.addItem(NSMenuItem(title: "Open ClipboardApp", action: #selector(openMainWindow), keyEquivalent: ""))
+        menu.addItem(NSMenuItem(title: "Open VSpot", action: #selector(openMainWindow), keyEquivalent: ""))
         menu.addItem(NSMenuItem.separator())
         menu.addItem(NSMenuItem(title: "Preferences...", action: #selector(openPreferences), keyEquivalent: ","))
         menu.addItem(NSMenuItem.separator())
-        menu.addItem(NSMenuItem(title: "About ClipboardApp", action: #selector(showAbout), keyEquivalent: ""))
+        menu.addItem(NSMenuItem(title: "About VSpot", action: #selector(showAbout), keyEquivalent: ""))
         menu.addItem(NSMenuItem.separator())
         menu.addItem(NSMenuItem(title: "Quit", action: #selector(quit), keyEquivalent: "q"))
         
@@ -263,11 +263,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @objc func showAbout() {
         NSApp.orderFrontStandardAboutPanel(
             options: [
-                .applicationName: "ClipboardApp",
+                .applicationName: "VSpot ClipboardApp",
                 .applicationVersion: "1.0.0",
                 .version: "Version 1.0.0",
                 .credits: NSAttributedString(string: """
-                    © 2024 ClipboardApp
+                    © 2024 VSpot ClipboardApp
                     
                     A powerful clipboard manager for macOS.
                     
