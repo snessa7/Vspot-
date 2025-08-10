@@ -196,7 +196,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
             
             if let button = statusItem?.button {
-                button.image = NSImage(systemSymbolName: "v.square.fill", accessibilityDescription: "VSpot ClipboardApp")
+                // Use the white circle with "v" icon for better menubar visibility
+                button.image = NSImage(systemSymbolName: "v.circle.fill", accessibilityDescription: "VSpot ClipboardApp")
+                button.image?.isTemplate = true // Ensures proper dark/light mode adaptation
+                
                 button.action = #selector(togglePopover)
                 button.target = self
                 button.sendAction(on: [.leftMouseUp, .rightMouseUp])

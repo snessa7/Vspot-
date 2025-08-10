@@ -1,27 +1,43 @@
-# ClipboardAppBeta - App Store Compliant Version
+# VSpot ClipboardApp - Claude Project Configuration
 
-## Project Overview
-A lightweight, App Store-compliant clipboard manager for macOS built with SwiftUI.
+## Project Context
+This is a macOS SwiftUI clipboard manager app designed for the menubar with App Store compliance.
 
-## Key Features
-- Searchable clipboard history
-- Sticky notes tab
-- Customizable user-defined tabs
-- Clean, minimal interface
-- App Store compliance (no file downloads, no screenshots)
+## Current Status
+- **Phase 1**: ✅ Complete (MenuBar Foundation & Setup)
+- **Phase 2**: ✅ Complete (Core Clipboard Functionality) 
+- **Phase 3**: ⚠️ ~75% Complete (Notes Functionality)
+- **Phase 4**: ⚠️ ~60% Complete (Customizable Tabs)
+- **Phase 5**: ❌ Not Started (App Store Compliance)
 
-## Development Environment
-- Xcode
-- SwiftUI for macOS
-- Target: macOS 12.0+
+## Key Architecture
+- **Framework**: SwiftUI + MenuBarExtra for macOS 13.0+
+- **Structure**: MVVM pattern with ObservableObject ViewModels
+- **Icon**: Custom "v" branding with PNG assets in all sizes
+- **Storage**: UserDefaults (planning Core Data migration)
 
-## Project Status
-- Phase: Planning & Setup
-- Created: $(date)
-- Lead Developer: Seth Paonessa
+## Main Components
+- `ClipboardAppApp.swift` - Main app entry with MenuBarExtra
+- `MenuBarContentView.swift` - Primary menubar interface
+- `ClipboardManager.swift` - Clipboard monitoring and management
+- `NotesManager.swift` - Sticky notes functionality
+- `PasteboardService.swift` - System clipboard integration
 
-## Next Steps
-1. Review and approve project plan
-2. Set up Xcode project structure
-3. Implement core features
-4. App Store submission preparation
+## Current Working Features
+- ✅ Real-time clipboard monitoring
+- ✅ Searchable clipboard history
+- ✅ Color-coded sticky notes
+- ✅ Custom tabs system
+- ✅ MenuBar integration
+
+## Next Priorities
+1. Complete Phase 3 & 4 remaining tasks
+2. Implement App Store compliance (Phase 5)
+3. Add proper encryption for sensitive data
+4. Create privacy policy and landing page
+
+## Development Notes
+- Use existing PNG icon assets in Assets.xcassets/AppIcon.appiconset/
+- All data stored locally for privacy
+- No external network calls (App Store compliant)
+- Proper entitlements configured for clipboard access
