@@ -25,17 +25,17 @@ if ! command -v sips &> /dev/null; then
     exit 1
 fi
 
-# Generate all required sizes
-sips -z 16 16 "$SOURCE_IMAGE" --out "$ASSETS_DIR/icon_16x16.png"
-sips -z 32 32 "$SOURCE_IMAGE" --out "$ASSETS_DIR/icon_16x16@2x.png"
-sips -z 32 32 "$SOURCE_IMAGE" --out "$ASSETS_DIR/icon_32x32.png"
-sips -z 64 64 "$SOURCE_IMAGE" --out "$ASSETS_DIR/icon_32x32@2x.png"
-sips -z 128 128 "$SOURCE_IMAGE" --out "$ASSETS_DIR/icon_128x128.png"
-sips -z 256 256 "$SOURCE_IMAGE" --out "$ASSETS_DIR/icon_128x128@2x.png"
-sips -z 256 256 "$SOURCE_IMAGE" --out "$ASSETS_DIR/icon_256x256.png"
-sips -z 512 512 "$SOURCE_IMAGE" --out "$ASSETS_DIR/icon_256x256@2x.png"
-sips -z 512 512 "$SOURCE_IMAGE" --out "$ASSETS_DIR/icon_512x512.png"
-sips -z 1024 1024 "$SOURCE_IMAGE" --out "$ASSETS_DIR/icon_512x512@2x.png"
+# Generate all required sizes in PNG format
+sips -z 16 16 "$SOURCE_IMAGE" --out "$ASSETS_DIR/icon_16x16.png" -s format png
+sips -z 32 32 "$SOURCE_IMAGE" --out "$ASSETS_DIR/icon_16x16@2x.png" -s format png
+sips -z 32 32 "$SOURCE_IMAGE" --out "$ASSETS_DIR/icon_32x32.png" -s format png
+sips -z 64 64 "$SOURCE_IMAGE" --out "$ASSETS_DIR/icon_32x32@2x.png" -s format png
+sips -z 128 128 "$SOURCE_IMAGE" --out "$ASSETS_DIR/icon_128x128.png" -s format png
+sips -z 256 256 "$SOURCE_IMAGE" --out "$ASSETS_DIR/icon_128x128@2x.png" -s format png
+sips -z 256 256 "$SOURCE_IMAGE" --out "$ASSETS_DIR/icon_256x256.png" -s format png
+sips -z 512 512 "$SOURCE_IMAGE" --out "$ASSETS_DIR/icon_256x256@2x.png" -s format png
+sips -z 512 512 "$SOURCE_IMAGE" --out "$ASSETS_DIR/icon_512x512.png" -s format png
+sips -z 1024 1024 "$SOURCE_IMAGE" --out "$ASSETS_DIR/icon_512x512@2x.png" -s format png
 
 echo "✅ App icons generated successfully!"
 echo "Icons saved to: $ASSETS_DIR"
