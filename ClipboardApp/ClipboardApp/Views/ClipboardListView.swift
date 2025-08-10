@@ -117,7 +117,7 @@ struct EmptyStateView: View {
                 .foregroundColor(.secondary)
             Text("Copy something to get started")
                 .font(.system(size: 12))
-                .foregroundColor(.tertiary)
+                .foregroundColor(Color.secondary.opacity(0.7))
         }
     }
 }

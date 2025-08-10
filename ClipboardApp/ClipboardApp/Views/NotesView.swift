@@ -10,6 +10,7 @@ import SwiftUI
 struct NotesView: View {
     @StateObject private var notesManager = NotesManager()
     @State private var showingNewNote = false
+    @State private var newNote = Note(title: "", content: "", color: .yellow)
     
     var body: some View {
         ScrollView {
@@ -39,11 +40,13 @@ struct NotesView: View {
             .padding()
         }
         .sheet(isPresented: $showingNewNote) {
-            NoteEditorView(note: .constant(Note(
-                title: "",
-                content: "",
-                color: .yellow
-            )))
+            NoteEditorView(note: $newNote)
+                .onDisappear {
+                    if !newNote.title.isEmpty || !newNote.content.isEmpty {
+                        notesManager.addNote(newNote)
+                        newNote = Note(title: "", content: "", color: .yellow)
+                    }
+                }
         }
     }
 }
@@ -66,7 +69,7 @@ struct NoteCard: View {
             
             Text(note.lastModified.formatted())
                 .font(.system(size: 9))
-                .foregroundColor(.tertiary)
+                .foregroundColor(Color.secondary.opacity(0.7))
         }
         .padding(8)
         .frame(height: 100)
