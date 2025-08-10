@@ -19,8 +19,8 @@ struct ClipboardAppApp: App {
             ContentView()
                 .environmentObject(appState)
                 .environmentObject(clipboardManager)
-                .frame(minWidth: 450, idealWidth: 500, maxWidth: 600,
-                       minHeight: 500, idealHeight: 600, maxHeight: 800)
+                .frame(minWidth: 500, idealWidth: 700, maxWidth: 900,
+                       minHeight: 450, idealHeight: 600, maxHeight: 800)
         }
         .windowStyle(.hiddenTitleBar)
         .commands {
@@ -96,6 +96,8 @@ struct ContentView: View {
                     ClipboardListView(searchText: searchText)
                 case .notes:
                     NotesView(searchText: searchText)
+                case .aiPrompts:
+                    AIPromptsView(searchText: searchText)
                 case .custom(let name):
                     CustomTabView(tabName: name)
                 }

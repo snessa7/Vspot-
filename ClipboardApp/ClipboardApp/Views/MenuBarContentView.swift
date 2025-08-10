@@ -35,6 +35,8 @@ struct MenuBarContentView: View {
                     ClipboardListView(searchText: searchText)
                 case .notes:
                     NotesView(searchText: searchText)
+                case .aiPrompts:
+                    AIPromptsView(searchText: searchText)
                 case .custom(let name):
                     CustomTabView(tabName: name)
                 }
@@ -60,6 +62,7 @@ struct HeaderView: View {
             // Tab buttons
             TabButton(title: "Clipboard", icon: "doc.on.clipboard", tab: .clipboard)
             TabButton(title: "Notes", icon: "note.text", tab: .notes)
+            TabButton(title: "AI Prompts", icon: "sparkles", tab: .aiPrompts)
             
             Spacer()
         }

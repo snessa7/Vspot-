@@ -53,11 +53,12 @@ enum MenuBarStyle: String {
 enum AppTab: Equatable {
     case clipboard
     case notes
+    case aiPrompts
     case custom(String)
     
     static func == (lhs: AppTab, rhs: AppTab) -> Bool {
         switch (lhs, rhs) {
-        case (.clipboard, .clipboard), (.notes, .notes):
+        case (.clipboard, .clipboard), (.notes, .notes), (.aiPrompts, .aiPrompts):
             return true
         case let (.custom(name1), .custom(name2)):
             return name1 == name2
