@@ -25,11 +25,7 @@ struct ClipboardAppApp: App {
         .windowStyle(.hiddenTitleBar)
         .commands {
             // Application menu
-            CommandGroup(replacing: .appInfo) {
-                Button("About VSpot") {
-                    appDelegate.showAbout()
-                }
-            }
+            CommandGroup(replacing: .appInfo) {}
             
             // File menu
             CommandGroup(replacing: .newItem) {}
@@ -226,16 +222,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @objc func togglePopover() {
         if let button = statusItem?.button {
-            if NSEvent.modifierFlags.contains(.control) || NSEvent.modifierFlags.contains(.option) {
-                // Right-click or option-click: show menu
-                showContextMenu(button)
-            } else {
-                // Left-click: toggle popover
-                if popover.isShown {
-                    popover.performClose(nil)
-                } else {
-                    popover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
+            // Check the current event to determine which mouse button was clicked
+            if let currentEvent = NSApp.currentEvent {
+                if currentEvent.type == .rightMouseUp {
+                    // Right-click: show context menu
+                    showContextMenu(button)
+                    return
                 }
+            }
+            
+            // Left-click: toggle popover
+            if popover.isShown {
+                popover.performClose(nil)
+            } else {
+                popover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
             }
         }
     }
@@ -243,13 +243,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func showContextMenu(_ sender: NSStatusBarButton) {
         let menu = NSMenu()
         
-        menu.addItem(NSMenuItem(title: "Open VSpot", action: #selector(openMainWindow), keyEquivalent: ""))
+        menu.addItem(NSMenuItem(title: "Open App", action: #selector(openMainWindow), keyEquivalent: ""))
         menu.addItem(NSMenuItem.separator())
-        menu.addItem(NSMenuItem(title: "Preferences...", action: #selector(openPreferences), keyEquivalent: ","))
-        menu.addItem(NSMenuItem.separator())
-        menu.addItem(NSMenuItem(title: "About VSpot", action: #selector(showAbout), keyEquivalent: ""))
-        menu.addItem(NSMenuItem.separator())
-        menu.addItem(NSMenuItem(title: "Quit", action: #selector(quit), keyEquivalent: "q"))
+        menu.addItem(NSMenuItem(title: "Quit App", action: #selector(quit), keyEquivalent: "q"))
         
         statusItem?.menu = menu
         statusItem?.button?.performClick(nil)
@@ -257,34 +253,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @objc func openMainWindow() {
+        // First activate the app
         NSApplication.shared.activate(ignoringOtherApps: true)
-        NSApp.windows.first?.makeKeyAndOrderFront(nil)
+        
+        // Try to find an existing window or create one
+        if let window = NSApp.windows.first {
+            window.makeKeyAndOrderFront(nil)
+            window.orderFrontRegardless()
+        } else {
+            // If no window exists, create a new one programmatically
+            NSApp.sendAction(Selector("newDocument:"), to: nil, from: nil)
+        }
     }
     
-    @objc func openPreferences() {
-        NSApp.sendAction(Selector(("showSettingsWindow:")), to: nil, from: nil)
-    }
-    
-    @objc func showAbout() {
-        NSApp.orderFrontStandardAboutPanel(
-            options: [
-                .applicationName: "VSpot ClipboardApp",
-                .applicationVersion: "1.0.0",
-                .version: "Version 1.0.0",
-                .credits: NSAttributedString(string: """
-                    © 2024 VSpot ClipboardApp
-                    
-                    A powerful clipboard manager for macOS.
-                    
-                    Features:
-                    • Real-time clipboard monitoring
-                    • Sticky notes with colors
-                    • Search functionality
-                    • Menu bar access
-                    """)
-            ]
-        )
-    }
     
     @objc func quit() {
         NSApplication.shared.terminate(nil)

@@ -24,13 +24,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		488CF47F2E480D0F00E32796 /* clipboardapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = clipboardapp.app; path = /Users/sethpaonessa/Desktop/ClipboardAppBeta/ClipboardApp/build/Debug/clipboardapp.app; sourceTree = "<absolute>"; };
-		488CF48D2E480D1200E32796 /* clipboardappTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = clipboardappTests.xctest; path = /Users/sethpaonessa/Desktop/ClipboardAppBeta/ClipboardApp/build/Debug/clipboardapp.app/Contents/PlugIns/clipboardappTests.xctest; sourceTree = "<absolute>"; };
-		488CF4972E480D1200E32796 /* clipboardappUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = clipboardappUITests.xctest; path = "/Users/sethpaonessa/Desktop/ClipboardAppBeta/ClipboardApp/build/Debug/clipboardappUITests-Runner.app/Contents/PlugIns/clipboardappUITests.xctest"; sourceTree = "<absolute>"; };
+		488CF5342E49773400E32796 /* clipboardapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = clipboardapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		488CF5352E49773400E32796 /* clipboardappTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = clipboardappTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		488CF5362E49773400E32796 /* clipboardappUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = clipboardappUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		488CF4812E480D0F00E32796 /* clipboardapp */ = {
+		488CF4812E480D0F00E32796 /* ClipboardApp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = ClipboardApp;
 			sourceTree = "<group>";
@@ -65,7 +65,10 @@
 		488CF4762E480D0F00E32796 = {
 			isa = PBXGroup;
 			children = (
-				488CF4812E480D0F00E32796 /* clipboardapp */,
+				488CF4812E480D0F00E32796 /* ClipboardApp */,
+				488CF5342E49773400E32796 /* clipboardapp.app */,
+				488CF5352E49773400E32796 /* clipboardappTests.xctest */,
+				488CF5362E49773400E32796 /* clipboardappUITests.xctest */,
 			);
 			sourceTree = "<group>";
 		};
@@ -85,13 +88,13 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				488CF4812E480D0F00E32796 /* clipboardapp */,
+				488CF4812E480D0F00E32796 /* ClipboardApp */,
 			);
 			name = clipboardapp;
 			packageProductDependencies = (
 			);
 			productName = clipboardapp;
-			productReference = 488CF47F2E480D0F00E32796 /* clipboardapp.app */;
+			productReference = 488CF5342E49773400E32796 /* clipboardapp.app */;
 			productType = "com.apple.product-type.application";
 		};
 		488CF48C2E480D1200E32796 /* clipboardappTests */ = {
@@ -111,7 +114,7 @@
 			packageProductDependencies = (
 			);
 			productName = clipboardappTests;
-			productReference = 488CF48D2E480D1200E32796 /* clipboardappTests.xctest */;
+			productReference = 488CF5352E49773400E32796 /* clipboardappTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		488CF4962E480D1200E32796 /* clipboardappUITests */ = {
@@ -131,7 +134,7 @@
 			packageProductDependencies = (
 			);
 			productName = clipboardappUITests;
-			productReference = 488CF4972E480D1200E32796 /* clipboardappUITests.xctest */;
+			productReference = 488CF5362E49773400E32796 /* clipboardappUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
