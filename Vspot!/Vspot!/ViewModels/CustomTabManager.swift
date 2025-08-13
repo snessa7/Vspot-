@@ -31,6 +31,20 @@ class CustomTabManager: ObservableObject {
         return newTab
     }
     
+    func reorderTabs(from sourceIndex: Int, to targetIndex: Int) {
+        guard sourceIndex >= 0 && sourceIndex < customTabs.count,
+              targetIndex >= 0 && targetIndex <= customTabs.count,
+              sourceIndex != targetIndex else {
+            return
+        }
+        
+        let movedTab = customTabs.remove(at: sourceIndex)
+        let insertIndex = targetIndex > sourceIndex ? targetIndex - 1 : targetIndex
+        let finalIndex = min(max(insertIndex, 0), customTabs.count)
+        customTabs.insert(movedTab, at: finalIndex)
+        saveCustomTabs()
+    }
+    
     func updateTab(_ tab: CustomTab, name: String, icon: String) {
         if let index = customTabs.firstIndex(where: { $0.id == tab.id }) {
             customTabs[index].name = name

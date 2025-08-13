@@ -14,7 +14,6 @@ struct CustomTabView: View {
     @State private var showingAddItem = false
     @State private var selectedItem: CustomTabItem? = nil
     @State private var showingEditItem = false
-    @State private var showingTabSettings = false
     
     private var currentTab: CustomTab? {
         customTabManager.getTab(byName: tabName)
@@ -55,11 +54,6 @@ struct CustomTabView: View {
                 AddEditCustomItemView(tab: tab, isEditing: true, item: item)
             }
         }
-        .sheet(isPresented: $showingTabSettings) {
-            if let tab = currentTab {
-                CustomTabSettingsView(tab: tab)
-            }
-        }
     }
     
     // MARK: - Header View
@@ -75,13 +69,6 @@ struct CustomTabView: View {
                 }
                 
                 Spacer()
-                
-                // Settings button
-                Button(action: { showingTabSettings = true }) {
-                    Image(systemName: "gear")
-                        .foregroundColor(.secondary)
-                }
-                .buttonStyle(.plain)
             }
             .padding(.horizontal)
             
@@ -429,38 +416,6 @@ struct AddEditCustomItemView: View {
     }
 }
 
-// MARK: - Tab Settings View
-
-struct CustomTabSettingsView: View {
-    let tab: CustomTab
-    @Environment(\.dismiss) private var dismiss
-    
-    var body: some View {
-        NavigationView {
-            VStack {
-                Text("Tab Settings")
-                    .font(.headline)
-                    .padding()
-                
-                Text("Advanced tab management will be available in a future update")
-                    .foregroundColor(.secondary)
-                    .padding()
-                
-                Spacer()
-            }
-            .navigationTitle("Settings")
-            .toolbar {
-                ToolbarItem(placement: .confirmationAction) {
-                    Button("Done") {
-                        dismiss()
-                    }
-                }
-            }
-        }
-        .presentationSizing(.fitted)
-        .frame(width: 400, height: 300)
-    }
-}
 
 #Preview {
     CustomTabView(tabName: "Passwords")

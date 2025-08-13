@@ -59,6 +59,8 @@ struct HeaderView: View {
     @ObservedObject var customTabManager = CustomTabManager.shared
     @State private var showingAddTab = false
     @State private var draggedTab: CustomTab?
+    @State private var tabToDelete: CustomTab?
+    @State private var showingDeleteConfirmation = false
     
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
@@ -76,6 +78,15 @@ struct HeaderView: View {
                         icon: customTab.icon,
                         tab: .custom(customTab.name)
                     )
+                    .contextMenu {
+                        Button("Delete Tab", role: .destructive) {
+                            tabToDelete = customTab
+                            showingDeleteConfirmation = true
+                        }
+                        Button("Rename Tab") {
+                            // TODO: Implement rename functionality
+                        }
+                    }
                     .onDrag {
                         draggedTab = customTab
                         return NSItemProvider(object: customTab.id.uuidString as NSString)
@@ -105,6 +116,22 @@ struct HeaderView: View {
         }
         .sheet(isPresented: $showingAddTab) {
             AddCustomTabView()
+        }
+        .confirmationDialog(
+            "Delete Tab",
+            isPresented: $showingDeleteConfirmation,
+            titleVisibility: .visible
+        ) {
+            Button("Delete", role: .destructive) {
+                if let tab = tabToDelete {
+                    deleteCustomTab(tab)
+                }
+            }
+            Button("Cancel", role: .cancel) { }
+        } message: {
+            if let tab = tabToDelete {
+                Text("Are you sure you want to delete the '\(tab.name)' tab? This will permanently remove all items in this tab.")
+            }
         }
     }
     
@@ -152,6 +179,17 @@ struct HeaderView: View {
             let movedTab = customTabManager.customTabs.remove(at: sourceIndex)
             customTabManager.customTabs.insert(movedTab, at: targetIndex)
             customTabManager.saveCustomTabs()
+        }
+    }
+    
+    private func deleteCustomTab(_ tab: CustomTab) {
+        // If we're currently viewing the tab being deleted, switch to clipboard tab
+        if appState.currentTab == .custom(tab.name) {
+            appState.currentTab = .clipboard
+        }
+        
+        withAnimation(.easeInOut(duration: 0.2)) {
+            customTabManager.deleteTab(tab)
         }
     }
 }
