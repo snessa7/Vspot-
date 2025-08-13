@@ -61,44 +61,74 @@ struct HeaderView: View {
     @State private var draggedTab: CustomTab?
     @State private var tabToDelete: CustomTab?
     @State private var showingDeleteConfirmation = false
+    @State private var dragTargetIndex: Int?
+    @State private var showDropIndicator = false
     
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 4) {
                 // Fixed tabs (compact)
                 CompactTabButton(title: "Board", icon: "doc.on.clipboard", tab: .clipboard)
-                CompactTabButton(title: "Notes", icon: "note.text", tab: .notes)
                 CompactTabButton(title: "AI", icon: "sparkles", tab: .aiPrompts)
+                CompactTabButton(title: "Notes", icon: "note.text", tab: .notes)
                 
-                // Custom tabs with drag reordering
-                ForEach(customTabManager.customTabs.indices, id: \.self) { index in
-                    let customTab = customTabManager.customTabs[index]
-                    CompactTabButton(
-                        title: abbreviatedTitle(customTab.name),
-                        icon: customTab.icon,
-                        tab: .custom(customTab.name)
-                    )
-                    .contextMenu {
-                        Button("Delete Tab", role: .destructive) {
-                            tabToDelete = customTab
-                            showingDeleteConfirmation = true
+                // Custom tabs with improved drag reordering
+                ForEach(Array(customTabManager.customTabs.enumerated()), id: \.element.id) { index, customTab in
+                    HStack(spacing: 2) {
+                        // Drop indicator before tab
+                        if showDropIndicator && dragTargetIndex == index {
+                            Rectangle()
+                                .fill(Color.accentColor)
+                                .frame(width: 2, height: 20)
+                                .animation(.easeInOut(duration: 0.2), value: showDropIndicator)
                         }
-                        Button("Rename Tab") {
-                            // TODO: Implement rename functionality
+                        
+                        CompactTabButton(
+                            title: abbreviatedTitle(customTab.name),
+                            icon: customTab.icon,
+                            tab: .custom(customTab.name)
+                        )
+                        .opacity(draggedTab?.id == customTab.id ? 0.5 : 1.0)
+                        .scaleEffect(draggedTab?.id == customTab.id ? 0.95 : 1.0)
+                        .contextMenu {
+                            Button(action: {
+                                confirmDeleteTab(customTab)
+                            }) {
+                                Label("Delete Tab", systemImage: "trash")
+                            }
+                            .foregroundColor(.red)
+                            
+                            Button(action: {
+                                // TODO: Implement rename functionality
+                            }) {
+                                Label("Rename Tab", systemImage: "pencil")
+                            }
                         }
-                    }
-                    .onDrag {
-                        draggedTab = customTab
-                        return NSItemProvider(object: customTab.id.uuidString as NSString)
-                    }
-                    .onDrop(of: [.text], isTargeted: nil) { providers in
-                        if let draggedTab = draggedTab {
-                            moveTab(draggedTab, to: customTab)
-                            self.draggedTab = nil
+                        .onDrag {
+                            draggedTab = customTab
+                            return NSItemProvider(object: customTab.id.uuidString as NSString)
                         }
-                        return true
+                        .onDrop(of: [.text], isTargeted: nil) { providers in
+                            return handleDrop(at: index)
+                        }
+                        
+                        // Drop indicator after last tab
+                        if showDropIndicator && dragTargetIndex == customTabManager.customTabs.count && index == customTabManager.customTabs.count - 1 {
+                            Rectangle()
+                                .fill(Color.accentColor)
+                                .frame(width: 2, height: 20)
+                                .animation(.easeInOut(duration: 0.2), value: showDropIndicator)
+                        }
                     }
                 }
+                
+                // Drop zone at the end for appending
+                Rectangle()
+                    .fill(Color.clear)
+                    .frame(width: 20, height: 20)
+                    .onDrop(of: [.text], isTargeted: nil) { providers in
+                        return handleDrop(at: customTabManager.customTabs.count)
+                    }
                 
                 // Fixed add button
                 Button(action: { showingAddTab = true }) {
@@ -113,6 +143,11 @@ struct HeaderView: View {
                 .help("Add Custom Tab")
             }
             .padding(.horizontal, 8)
+            .onDrop(of: [.text], isTargeted: nil) { providers in
+                // Reset drag state when dropping outside valid areas
+                resetDragState()
+                return false
+            }
         }
         .sheet(isPresented: $showingAddTab) {
             AddCustomTabView()
@@ -127,7 +162,9 @@ struct HeaderView: View {
                     deleteCustomTab(tab)
                 }
             }
-            Button("Cancel", role: .cancel) { }
+            Button("Cancel", role: .cancel) {
+                resetDeleteState()
+            }
         } message: {
             if let tab = tabToDelete {
                 Text("Are you sure you want to delete the '\(tab.name)' tab? This will permanently remove all items in this tab.")
@@ -169,17 +206,47 @@ struct HeaderView: View {
         }
     }
     
-    private func moveTab(_ sourceTab: CustomTab, to targetTab: CustomTab) {
-        guard let sourceIndex = customTabManager.customTabs.firstIndex(where: { $0.id == sourceTab.id }),
-              let targetIndex = customTabManager.customTabs.firstIndex(where: { $0.id == targetTab.id }) else {
-            return
+    // MARK: - Drag and Drop Handling
+    
+    private func handleDrop(at targetIndex: Int) -> Bool {
+        guard let draggedTab = draggedTab else {
+            resetDragState()
+            return false
         }
         
-        withAnimation(.easeInOut(duration: 0.2)) {
-            let movedTab = customTabManager.customTabs.remove(at: sourceIndex)
-            customTabManager.customTabs.insert(movedTab, at: targetIndex)
-            customTabManager.saveCustomTabs()
+        guard let sourceIndex = customTabManager.customTabs.firstIndex(where: { $0.id == draggedTab.id }) else {
+            resetDragState()
+            return false
         }
+        
+        // Don't move if dropping on same position
+        if sourceIndex == targetIndex {
+            resetDragState()
+            return true
+        }
+        
+        // Perform the reorder operation using CustomTabManager's method
+        withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
+            customTabManager.reorderTabs(from: sourceIndex, to: targetIndex)
+        }
+        
+        resetDragState()
+        return true
+    }
+    
+    private func resetDragState() {
+        withAnimation(.easeOut(duration: 0.2)) {
+            draggedTab = nil
+            dragTargetIndex = nil
+            showDropIndicator = false
+        }
+    }
+    
+    // MARK: - Deletion Handling
+    
+    private func confirmDeleteTab(_ tab: CustomTab) {
+        tabToDelete = tab
+        showingDeleteConfirmation = true
     }
     
     private func deleteCustomTab(_ tab: CustomTab) {
@@ -188,9 +255,16 @@ struct HeaderView: View {
             appState.currentTab = .clipboard
         }
         
-        withAnimation(.easeInOut(duration: 0.2)) {
+        withAnimation(.easeInOut(duration: 0.3)) {
             customTabManager.deleteTab(tab)
         }
+        
+        resetDeleteState()
+    }
+    
+    private func resetDeleteState() {
+        tabToDelete = nil
+        showingDeleteConfirmation = false
     }
 }
 
@@ -205,23 +279,22 @@ struct CompactTabButton: View {
     }
     
     var body: some View {
-        Button(action: {
-            appState.currentTab = tab
-        }) {
-            VStack(spacing: 2) {
-                Image(systemName: icon)
-                    .font(.system(size: 10))
-                Text(title)
-                    .font(.system(size: 8))
-                    .lineLimit(1)
-            }
-            .padding(.horizontal, 6)
-            .padding(.vertical, 3)
-            .background(isSelected ? Color.accentColor.opacity(0.2) : Color.clear)
-            .cornerRadius(4)
+        VStack(spacing: 2) {
+            Image(systemName: icon)
+                .font(.system(size: 10))
+            Text(title)
+                .font(.system(size: 8))
+                .lineLimit(1)
         }
-        .buttonStyle(.plain)
+        .padding(.horizontal, 6)
+        .padding(.vertical, 3)
+        .background(isSelected ? Color.accentColor.opacity(0.2) : Color.clear)
+        .cornerRadius(4)
         .foregroundColor(isSelected ? .accentColor : .secondary)
+        .contentShape(Rectangle())
+        .onTapGesture {
+            appState.currentTab = tab
+        }
         .help(getFullTitle(title, tab))
     }
     
@@ -343,19 +416,21 @@ struct AddCustomTabView: View {
                     Text("Icon")
                         .font(.headline)
                     
-                    LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 6), spacing: 10) {
+                    LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 8), count: 6), spacing: 8) {
                         ForEach(availableIcons, id: \.self) { icon in
                             Button(action: { selectedIcon = icon }) {
                                 Image(systemName: icon)
-                                    .font(.system(size: 20))
+                                    .font(.system(size: 18))
                                     .foregroundColor(selectedIcon == icon ? .white : .primary)
-                                    .frame(width: 40, height: 40)
-                                    .background(selectedIcon == icon ? Color.blue : Color.gray.opacity(0.2))
-                                    .cornerRadius(8)
+                                    .frame(width: 36, height: 36)
+                                    .background(selectedIcon == icon ? Color.blue : Color.gray.opacity(0.15))
+                                    .cornerRadius(6)
                             }
                             .buttonStyle(.plain)
+                            .help(icon)
                         }
                     }
+                    .padding(.horizontal, 4)
                 }
                 
                 Toggle("Secure Tab (for sensitive data)", isOn: $isSecure)
@@ -379,8 +454,8 @@ struct AddCustomTabView: View {
                 }
             }
         }
+        .frame(width: 480, height: 420)
         .presentationSizing(.fitted)
-        .frame(width: 450, height: 400)
     }
     
     private func createTab() {

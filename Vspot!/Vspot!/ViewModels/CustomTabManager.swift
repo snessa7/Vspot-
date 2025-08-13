@@ -39,8 +39,19 @@ class CustomTabManager: ObservableObject {
         }
         
         let movedTab = customTabs.remove(at: sourceIndex)
-        let insertIndex = targetIndex > sourceIndex ? targetIndex - 1 : targetIndex
-        let finalIndex = min(max(insertIndex, 0), customTabs.count)
+        
+        // Calculate the correct insertion index
+        let insertIndex: Int
+        if targetIndex > sourceIndex {
+            // Moving forward: target index decreases by 1 because we removed an element before it
+            insertIndex = min(targetIndex - 1, customTabs.count)
+        } else {
+            // Moving backward: target index stays the same
+            insertIndex = targetIndex
+        }
+        
+        // Ensure insertion index is within bounds
+        let finalIndex = max(0, min(insertIndex, customTabs.count))
         customTabs.insert(movedTab, at: finalIndex)
         saveCustomTabs()
     }
