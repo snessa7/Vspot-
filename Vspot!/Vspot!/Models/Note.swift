@@ -1,6 +1,6 @@
 //
 //  Note.swift
-//  ClipboardApp
+//  Vspot!
 //
 //  Model for sticky notes
 //

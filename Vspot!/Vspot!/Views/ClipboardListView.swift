@@ -1,6 +1,6 @@
 //
 //  ClipboardListView.swift
-//  ClipboardApp
+//  Vspot!
 //
 //  Display list of clipboard items
 //

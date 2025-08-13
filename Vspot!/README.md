@@ -1,17 +1,17 @@
-# ClipboardApp - Xcode Project
+# Vspot! - Xcode Project
 
 ## Opening the Project
 
-1. **Option 1: Open Package.swift** (Recommended)
-   - Double-click `Package.swift` in Finder, or
-   - Open Xcode and select File → Open → Navigate to `Package.swift`
-   - This will open the project as a Swift Package
+1. **Option 1: Open vspot.xcodeproj** (Recommended)
+   - Double-click `vspot.xcodeproj` in Finder, or
+   - Open Xcode and select File → Open → Navigate to `vspot.xcodeproj`
+   - This will open the project
 
 2. **Option 2: Create Xcode Project**
    - Open Xcode
    - File → New → Project
    - Choose macOS → App
-   - Product Name: ClipboardApp
+   - Product Name: Vspot!
    - Interface: SwiftUI
    - Language: Swift
    - Then copy the source files into the new project
@@ -19,8 +19,8 @@
 ## Project Structure
 
 ```
-ClipboardApp/
-├── ClipboardAppApp.swift       # Main app entry with MenuBarExtra
+VspotApp/
+├── VspotApp.swift              # Main app entry with MenuBarExtra
 ├── Models/                     # Data models
 │   ├── AppState.swift
 │   ├── ClipboardItem.swift
@@ -38,7 +38,7 @@ ClipboardApp/
 │   └── PasteboardService.swift
 └── Resources/                  # App resources
     ├── Info.plist
-    └── ClipboardApp.entitlements
+    └── Vspot.entitlements
 ```
 
 ## Building and Running

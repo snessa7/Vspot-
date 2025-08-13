@@ -4,7 +4,7 @@
 # Usage: ./generate_icons.sh /path/to/source/image.png
 
 SOURCE_IMAGE="$1"
-ASSETS_DIR="/Users/sethpaonessa/Desktop/ClipboardAppBeta/ClipboardApp/clipboardapp/Assets.xcassets/AppIcon.appiconset"
+ASSETS_DIR="VspotApp/Assets.xcassets/AppIcon.appiconset"
 
 if [ -z "$SOURCE_IMAGE" ]; then
     echo "Please provide the path to your V logo image"

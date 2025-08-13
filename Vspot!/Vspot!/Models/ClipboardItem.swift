@@ -1,6 +1,6 @@
 //
 //  ClipboardItem.swift
-//  ClipboardApp
+//  Vspot!!
 //
 //  Model for clipboard items
 //

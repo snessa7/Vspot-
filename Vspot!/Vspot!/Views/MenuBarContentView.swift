@@ -1,6 +1,6 @@
 //
 //  MenuBarContentView.swift
-//  ClipboardApp
+//  Vspot!
 //
 //  Main content view for the menubar app
 //

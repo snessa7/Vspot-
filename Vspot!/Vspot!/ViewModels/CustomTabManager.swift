@@ -1,6 +1,6 @@
 //
 //  CustomTabManager.swift
-//  ClipboardApp
+//  Vspot!
 //
 //  Manages custom user-created tabs
 //

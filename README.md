@@ -1,4 +1,4 @@
-# ClipboardAppBeta 📋
+# Vspot! 📋
 
 > A lightweight, App Store-compliant menubar clipboard manager for macOS built with SwiftUI
 

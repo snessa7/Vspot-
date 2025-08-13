@@ -1,6 +1,6 @@
 //
 //  NotesManager.swift
-//  ClipboardApp
+//  Vspot!!
 //
 //  Manages sticky notes
 //

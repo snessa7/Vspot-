@@ -1,6 +1,6 @@
 //
 //  PasteboardService.swift
-//  ClipboardApp
+//  Vspot!
 //
 //  Service for monitoring the system pasteboard
 //

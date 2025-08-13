@@ -1,6 +1,6 @@
 //
 //  AIPrompt.swift
-//  ClipboardApp
+//  Vspot!
 //
 //  AI Prompt model for storing frequently used prompts
 //

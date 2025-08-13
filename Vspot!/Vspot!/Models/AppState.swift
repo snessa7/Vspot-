@@ -1,6 +1,6 @@
 //
 //  AppState.swift
-//  ClipboardApp
+//  Vspot!
 //
 //  Global app state management
 //

@@ -1,6 +1,6 @@
 //
 //  ClipboardManager.swift
-//  ClipboardApp
+//  Vspot!!
 //
 //  Manages clipboard monitoring and history
 //

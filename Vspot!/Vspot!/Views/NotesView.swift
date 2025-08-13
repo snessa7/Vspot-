@@ -1,6 +1,6 @@
 //
 //  NotesView.swift
-//  ClipboardApp
+//  Vspot!
 //
 //  Sticky notes view
 //

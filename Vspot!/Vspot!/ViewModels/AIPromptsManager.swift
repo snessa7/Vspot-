@@ -1,6 +1,6 @@
 //
 //  AIPromptsManager.swift
-//  ClipboardApp
+//  Vspot!!
 //
 //  Manages AI prompts storage and operations
 //

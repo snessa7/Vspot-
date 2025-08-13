@@ -12,27 +12,27 @@
 			containerPortal = 488CF4772E480D0F00E32796 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 488CF47E2E480D0F00E32796;
-			remoteInfo = clipboardapp;
+			remoteInfo = "Vspot!";
 		};
 		488CF4982E480D1200E32796 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 488CF4772E480D0F00E32796 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 488CF47E2E480D0F00E32796;
-			remoteInfo = clipboardapp;
+			remoteInfo = "Vspot!";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		488CF5342E49773400E32796 /* clipboardapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = clipboardapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		488CF5352E49773400E32796 /* clipboardappTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = clipboardappTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		488CF5362E49773400E32796 /* clipboardappUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = clipboardappUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		488CF5342E49773400E32796 /* Vspot!.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Vspot!.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		488CF5352E49773400E32796 /* vspotTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = vspotTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		488CF5362E49773400E32796 /* vspotUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = vspotUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		488CF4812E480D0F00E32796 /* ClipboardApp */ = {
+		488CF4812E480D0F00E32796 /* Vspot! */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = ClipboardApp;
+			path = "Vspot!";
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -65,19 +65,19 @@
 		488CF4762E480D0F00E32796 = {
 			isa = PBXGroup;
 			children = (
-				488CF4812E480D0F00E32796 /* ClipboardApp */,
-				488CF5342E49773400E32796 /* clipboardapp.app */,
-				488CF5352E49773400E32796 /* clipboardappTests.xctest */,
-				488CF5362E49773400E32796 /* clipboardappUITests.xctest */,
+				488CF4812E480D0F00E32796 /* Vspot! */,
+				488CF5342E49773400E32796 /* Vspot!.app */,
+				488CF5352E49773400E32796 /* vspotTests.xctest */,
+				488CF5362E49773400E32796 /* vspotUITests.xctest */,
 			);
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		488CF47E2E480D0F00E32796 /* clipboardapp */ = {
+		488CF47E2E480D0F00E32796 /* Vspot! */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 488CF4A12E480D1200E32796 /* Build configuration list for PBXNativeTarget "clipboardapp" */;
+			buildConfigurationList = 488CF4A12E480D1200E32796 /* Build configuration list for PBXNativeTarget "Vspot!" */;
 			buildPhases = (
 				488CF47B2E480D0F00E32796 /* Sources */,
 				488CF47C2E480D0F00E32796 /* Frameworks */,
@@ -88,18 +88,18 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				488CF4812E480D0F00E32796 /* ClipboardApp */,
+				488CF4812E480D0F00E32796 /* Vspot! */,
 			);
-			name = clipboardapp;
+			name = "Vspot!";
 			packageProductDependencies = (
 			);
-			productName = clipboardapp;
-			productReference = 488CF5342E49773400E32796 /* clipboardapp.app */;
+			productName = "Vspot!";
+			productReference = 488CF5342E49773400E32796 /* Vspot!.app */;
 			productType = "com.apple.product-type.application";
 		};
-		488CF48C2E480D1200E32796 /* clipboardappTests */ = {
+		488CF48C2E480D1200E32796 /* vspotTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 488CF4A42E480D1200E32796 /* Build configuration list for PBXNativeTarget "clipboardappTests" */;
+			buildConfigurationList = 488CF4A42E480D1200E32796 /* Build configuration list for PBXNativeTarget "vspotTests" */;
 			buildPhases = (
 				488CF4892E480D1200E32796 /* Sources */,
 				488CF48A2E480D1200E32796 /* Frameworks */,
@@ -110,16 +110,16 @@
 			dependencies = (
 				488CF48F2E480D1200E32796 /* PBXTargetDependency */,
 			);
-			name = clipboardappTests;
+			name = vspotTests;
 			packageProductDependencies = (
 			);
-			productName = clipboardappTests;
-			productReference = 488CF5352E49773400E32796 /* clipboardappTests.xctest */;
+			productName = vspotTests;
+			productReference = 488CF5352E49773400E32796 /* vspotTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		488CF4962E480D1200E32796 /* clipboardappUITests */ = {
+		488CF4962E480D1200E32796 /* vspotUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 488CF4A72E480D1200E32796 /* Build configuration list for PBXNativeTarget "clipboardappUITests" */;
+			buildConfigurationList = 488CF4A72E480D1200E32796 /* Build configuration list for PBXNativeTarget "vspotUITests" */;
 			buildPhases = (
 				488CF4932E480D1200E32796 /* Sources */,
 				488CF4942E480D1200E32796 /* Frameworks */,
@@ -130,11 +130,11 @@
 			dependencies = (
 				488CF4992E480D1200E32796 /* PBXTargetDependency */,
 			);
-			name = clipboardappUITests;
+			name = vspotUITests;
 			packageProductDependencies = (
 			);
-			productName = clipboardappUITests;
-			productReference = 488CF5362E49773400E32796 /* clipboardappUITests.xctest */;
+			productName = vspotUITests;
+			productReference = 488CF5362E49773400E32796 /* vspotUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -160,7 +160,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 488CF47A2E480D0F00E32796 /* Build configuration list for PBXProject "clipboardapp" */;
+			buildConfigurationList = 488CF47A2E480D0F00E32796 /* Build configuration list for PBXProject "Vspot!" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -174,9 +174,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				488CF47E2E480D0F00E32796 /* clipboardapp */,
-				488CF48C2E480D1200E32796 /* clipboardappTests */,
-				488CF4962E480D1200E32796 /* clipboardappUITests */,
+				488CF47E2E480D0F00E32796 /* Vspot! */,
+				488CF48C2E480D1200E32796 /* vspotTests */,
+				488CF4962E480D1200E32796 /* vspotUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -232,12 +232,12 @@
 /* Begin PBXTargetDependency section */
 		488CF48F2E480D1200E32796 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 488CF47E2E480D0F00E32796 /* clipboardapp */;
+			target = 488CF47E2E480D0F00E32796 /* Vspot! */;
 			targetProxy = 488CF48E2E480D1200E32796 /* PBXContainerItemProxy */;
 		};
 		488CF4992E480D1200E32796 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 488CF47E2E480D0F00E32796 /* clipboardapp */;
+			target = 488CF47E2E480D0F00E32796 /* Vspot! */;
 			targetProxy = 488CF4982E480D1200E32796 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -368,7 +368,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = ClipboardApp/clipboardapp.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "Vspot!/vspot.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -384,7 +384,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = snessa7.clipboardapp;
+				PRODUCT_BUNDLE_IDENTIFIER = snessa7.vspot;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -397,7 +397,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = ClipboardApp/clipboardapp.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "Vspot!/vspot.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -413,7 +413,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = snessa7.clipboardapp;
+				PRODUCT_BUNDLE_IDENTIFIER = snessa7.vspot;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -431,11 +431,11 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 15.5;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = snessa7.clipboardappTests;
+				PRODUCT_BUNDLE_IDENTIFIER = snessa7.vspotTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/clipboardapp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/clipboardapp";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Vspot!.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Vspot!";
 			};
 			name = Debug;
 		};
@@ -449,11 +449,11 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 15.5;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = snessa7.clipboardappTests;
+				PRODUCT_BUNDLE_IDENTIFIER = snessa7.vspotTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/clipboardapp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/clipboardapp";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Vspot!.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Vspot!";
 			};
 			name = Release;
 		};
@@ -465,11 +465,11 @@
 				DEVELOPMENT_TEAM = Q9APTZPKFV;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = snessa7.clipboardappUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = snessa7.vspotUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TEST_TARGET_NAME = clipboardapp;
+				TEST_TARGET_NAME = "Vspot!";
 			};
 			name = Debug;
 		};
@@ -481,18 +481,18 @@
 				DEVELOPMENT_TEAM = Q9APTZPKFV;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = snessa7.clipboardappUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = snessa7.vspotUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TEST_TARGET_NAME = clipboardapp;
+				TEST_TARGET_NAME = "Vspot!";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		488CF47A2E480D0F00E32796 /* Build configuration list for PBXProject "clipboardapp" */ = {
+		488CF47A2E480D0F00E32796 /* Build configuration list for PBXProject "Vspot!" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				488CF49F2E480D1200E32796 /* Debug */,
@@ -501,7 +501,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		488CF4A12E480D1200E32796 /* Build configuration list for PBXNativeTarget "clipboardapp" */ = {
+		488CF4A12E480D1200E32796 /* Build configuration list for PBXNativeTarget "Vspot!" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				488CF4A22E480D1200E32796 /* Debug */,
@@ -510,7 +510,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		488CF4A42E480D1200E32796 /* Build configuration list for PBXNativeTarget "clipboardappTests" */ = {
+		488CF4A42E480D1200E32796 /* Build configuration list for PBXNativeTarget "vspotTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				488CF4A52E480D1200E32796 /* Debug */,
@@ -519,7 +519,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		488CF4A72E480D1200E32796 /* Build configuration list for PBXNativeTarget "clipboardappUITests" */ = {
+		488CF4A72E480D1200E32796 /* Build configuration list for PBXNativeTarget "vspotUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				488CF4A82E480D1200E32796 /* Debug */,

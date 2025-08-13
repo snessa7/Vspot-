@@ -1,6 +1,6 @@
 //
 //  CustomTabView.swift
-//  ClipboardApp
+//  Vspot!
 //
 //  Custom user-defined tabs
 //

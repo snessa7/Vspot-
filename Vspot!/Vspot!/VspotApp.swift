@@ -1,6 +1,6 @@
 //
-//  ClipboardAppApp.swift
-//  ClipboardApp
+//  Vspot!App.swift
+//  Vspot!
 //
 //  Clipboard manager for macOS with menubar access
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct ClipboardAppApp: App {
+struct VspotApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @StateObject private var appState = AppState()
     @StateObject private var clipboardManager = ClipboardManager()
@@ -195,7 +195,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             
             if let button = statusItem?.button {
                 // Use the white circle with "v" icon for better menubar visibility
-                button.image = NSImage(systemSymbolName: "v.circle.fill", accessibilityDescription: "VSpot ClipboardApp")
+                button.image = NSImage(systemSymbolName: "v.circle.fill", accessibilityDescription: "Vspot!")
                 button.image?.isTemplate = true // Ensures proper dark/light mode adaptation
                 
                 button.action = #selector(togglePopover)

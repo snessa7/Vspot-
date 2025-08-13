@@ -1,6 +1,6 @@
 //
 //  AIPromptsView.swift
-//  ClipboardApp
+//  Vspot!
 //
 //  AI Prompts management interface
 //
