@@ -115,18 +115,7 @@ struct CustomTabView: View {
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)
                 
-                Button(action: { showingAddItem = true }) {
-                    HStack {
-                        Image(systemName: "plus")
-                        Text("Add Item")
-                    }
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 8)
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(8)
-                }
-                .buttonStyle(.plain)
+                // Removed redundant "Add Item" button - use the one in the header instead
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -163,121 +152,55 @@ struct CustomItemRowView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            // Header with primary field and actions
             HStack {
-                // Primary field (first field or title)
-                if let primaryField = tab.fields.first,
-                   let primaryValue = item.values[primaryField.name] {
-                    HStack {
-                        Image(systemName: tab.icon)
-                            .foregroundColor(.blue)
-                        
-                        Text(primaryValue)
-                            .font(.headline)
-                            .lineLimit(1)
-                    }
-                } else {
-                    Text("Untitled Item")
-                        .font(.headline)
-                        .foregroundColor(.secondary)
-                }
+                Image(systemName: tab.icon)
+                    .foregroundColor(.blue)
+                
+                Text(item.values["Username"] ?? "Untitled")
+                    .font(.headline)
                 
                 Spacer()
                 
-                // Actions
-                HStack(spacing: 12) {
-                    // Copy primary value
-                    if let primaryField = tab.fields.first,
-                       let primaryValue = item.values[primaryField.name] {
-                        Button(action: { copyValue(primaryValue) }) {
-                            Image(systemName: "doc.on.clipboard")
-                                .foregroundColor(.blue)
+                HStack(spacing: 8) {
+                    // Copy username
+                    if let username = item.values["Username"], !username.isEmpty {
+                        Button("Copy User") {
+                            copyToClipboard(username)
                         }
-                        .buttonStyle(.plain)
-                        .help("Copy \(primaryField.name)")
+                        .buttonStyle(.borderedProminent)
+                        .controlSize(.small)
                     }
                     
-                    // Edit
-                    Button(action: onEdit) {
-                        Image(systemName: "pencil")
-                            .foregroundColor(.orange)
-                    }
-                    .buttonStyle(.plain)
-                    
-                    // Delete
-                    Button(action: { deleteItem() }) {
-                        Image(systemName: "trash")
-                            .foregroundColor(.red)
-                    }
-                    .buttonStyle(.plain)
-                }
-            }
-            
-            // Additional fields preview
-            VStack(alignment: .leading, spacing: 4) {
-                ForEach(tab.fields.dropFirst().prefix(2), id: \.id) { field in
-                    if let value = item.values[field.name], !value.isEmpty {
-                        HStack {
-                            Text("\(field.name):")
-                                .font(.caption)
-                                .foregroundColor(.secondary)
-                            
-                            if field.isSecure {
-                                Text("••••••••")
-                                    .font(.caption)
-                                    .foregroundColor(.secondary)
-                                
-                                Button(action: { copyValue(value) }) {
-                                    Image(systemName: "doc.on.clipboard")
-                                        .font(.caption)
-                                        .foregroundColor(.blue)
-                                }
-                                .buttonStyle(.plain)
-                            } else {
-                                Text(value)
-                                    .font(.caption)
-                                    .foregroundColor(.primary)
-                                    .lineLimit(field.type == .multilineText ? 2 : 1)
-                            }
-                            
-                            Spacer()
+                    // Copy password
+                    if let password = item.values["Password"], !password.isEmpty {
+                        Button("Copy Pass") {
+                            copyToClipboard(password)
                         }
+                        .buttonStyle(.borderedProminent)
+                        .controlSize(.small)
                     }
+                    
+                    Button("Edit") {
+                        onEdit()
+                    }
+                    .buttonStyle(.bordered)
+                    .controlSize(.small)
+                    
+                    Button("Delete") {
+                        deleteItem()
+                    }
+                    .buttonStyle(.bordered)
+                    .controlSize(.small)
+                    .foregroundColor(.red)
                 }
-                
-                // Show indicator if there are more fields
-                if tab.fields.count > 3 {
-                    Text("+\(tab.fields.count - 3) more fields")
-                        .font(.caption2)
-                        .foregroundColor(.secondary)
-                }
-            }
-            
-            // Date info
-            HStack {
-                Text("Created \(item.createdDate, style: .date)")
-                    .font(.caption2)
-                    .foregroundColor(.secondary)
-                
-                if item.modifiedDate != item.createdDate {
-                    Text("• Modified \(item.modifiedDate, style: .date)")
-                        .font(.caption2)
-                        .foregroundColor(.secondary)
-                }
-                
-                Spacer()
             }
         }
         .padding()
         .background(Color(NSColor.controlBackgroundColor))
         .cornerRadius(8)
-        .onTapGesture(count: 2) {
-            // Double-tap to edit
-            onEdit()
-        }
     }
     
-    private func copyValue(_ value: String) {
+    private func copyToClipboard(_ value: String) {
         NSPasteboard.general.clearContents()
         NSPasteboard.general.setString(value, forType: .string)
         NSSound.beep()
@@ -296,6 +219,7 @@ struct AddEditCustomItemView: View {
     let item: CustomTabItem?
     
     @State private var fieldValues: [String: String] = [:]
+    @State private var isSaving = false
     @Environment(\.dismiss) private var dismiss
     @ObservedObject var customTabManager = CustomTabManager.shared
     
@@ -304,7 +228,22 @@ struct AddEditCustomItemView: View {
         self.isEditing = isEditing
         self.item = item
         
-        _fieldValues = State(initialValue: item?.values ?? [:])
+        // Initialize fieldValues with existing item values or empty strings for all fields
+        var initialValues: [String: String] = [:]
+        
+        // First, set all fields to empty strings
+        for field in tab.fields {
+            initialValues[field.name] = ""
+        }
+        
+        // Then, override with existing values if editing
+        if let existingValues = item?.values {
+            for (key, value) in existingValues {
+                initialValues[key] = value
+            }
+        }
+        
+        _fieldValues = State(initialValue: initialValues)
     }
     
     var body: some View {
@@ -340,10 +279,20 @@ struct AddEditCustomItemView: View {
                 }
                 
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Save") {
+                    Button(action: {
                         saveItem()
+                    }) {
+                        if isSaving {
+                            HStack {
+                                ProgressView()
+                                    .scaleEffect(0.8)
+                                Text("Saving...")
+                            }
+                        } else {
+                            Text("Save")
+                        }
                     }
-                    .disabled(!isValidInput())
+                    .disabled(!isValidInput() || isSaving)
                 }
             }
         }
@@ -398,8 +347,10 @@ struct AddEditCustomItemView: View {
     }
     
     private func isValidInput() -> Bool {
+        // Check if any required fields are missing or empty
         for field in tab.fields where field.isRequired {
-            if fieldValues[field.name]?.isEmpty ?? true {
+            let value = fieldValues[field.name] ?? ""
+            if value.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                 return false
             }
         }
@@ -407,16 +358,47 @@ struct AddEditCustomItemView: View {
     }
     
     private func saveItem() {
-        if isEditing, let item = item {
-            customTabManager.updateItem(in: tab.name, item: item, values: fieldValues)
-        } else {
-            customTabManager.addItem(to: tab.name, values: fieldValues)
+        // Prevent double-saving
+        guard !isSaving else { return }
+        
+        isSaving = true
+        
+        // Clean up field values by trimming whitespace
+        var cleanedValues: [String: String] = [:]
+        for (key, value) in fieldValues {
+            let trimmedValue = value.trimmingCharacters(in: .whitespacesAndNewlines)
+            cleanedValues[key] = trimmedValue
         }
-        dismiss()
+        
+        // Add some debug logging
+        print("Saving item to tab: \(tab.name)")
+        print("Field values: \(cleanedValues)")
+        print("Is editing: \(isEditing)")
+        
+        // Perform the save operation
+        do {
+            if isEditing, let item = item {
+                customTabManager.updateItem(in: tab.name, item: item, values: cleanedValues)
+                print("Successfully updated item with ID: \(item.id)")
+            } else {
+                customTabManager.addItem(to: tab.name, values: cleanedValues)
+                print("Successfully added new item to tab: \(tab.name)")
+            }
+            
+            // Small delay to show saving state
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                isSaving = false
+                dismiss()
+            }
+        } catch {
+            print("Error saving item: \(error)")
+            isSaving = false
+        }
     }
 }
 
 
 #Preview {
     CustomTabView(tabName: "Passwords")
+        .environmentObject(ClipboardManager())
 }
