@@ -38,7 +38,7 @@ struct MenuBarContentView: View {
                 case .aiPrompts:
                     AIPromptsView(searchText: searchText)
                 case .custom(let name):
-                    CustomTabView(tabName: name)
+                    CustomTabView(tabName: name, searchText: searchText)
                 }
             }
             .frame(maxWidth: 400, maxHeight: 500)

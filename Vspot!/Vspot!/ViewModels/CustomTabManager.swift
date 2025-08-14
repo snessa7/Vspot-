@@ -25,7 +25,14 @@ class CustomTabManager: ObservableObject {
     // MARK: - Tab Management
     
     func createTab(name: String, icon: String = "folder", isSecure: Bool = false) -> CustomTab {
-        let newTab = CustomTab(name: name, icon: icon, isSecure: isSecure)
+        // Create default fields for the new tab
+        let defaultFields: [CustomField] = [
+            CustomField(name: "Title", type: .text, isRequired: true, placeholder: "Enter title"),
+            CustomField(name: "Description", type: .multilineText, placeholder: "Enter description"),
+            CustomField(name: "Tags", type: .text, placeholder: "Enter tags (comma separated)")
+        ]
+        
+        let newTab = CustomTab(name: name, icon: icon, fields: defaultFields, isSecure: isSecure)
         customTabs.append(newTab)
         saveCustomTabs()
         return newTab

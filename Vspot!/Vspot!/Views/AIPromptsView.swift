@@ -9,14 +9,14 @@ import SwiftUI
 
 struct AIPromptsView: View {
     @ObservedObject var promptsManager = AIPromptsManager.shared
-    @State private var searchText: String
+    let searchText: String
     @State private var selectedCategory: PromptCategory? = nil
     @State private var showingAddPrompt = false
     @State private var selectedPrompt: AIPrompt? = nil
     @State private var showingEditPrompt = false
     
     init(searchText: String = "") {
-        _searchText = State(initialValue: searchText)
+        self.searchText = searchText
     }
     
     var filteredPrompts: [AIPrompt] {
@@ -141,18 +141,7 @@ struct AIPromptsView: View {
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
             
-            Button(action: { showingAddPrompt = true }) {
-                HStack {
-                    Image(systemName: "plus")
-                    Text("Add Prompt")
-                }
-                .padding(.horizontal, 16)
-                .padding(.vertical, 8)
-                .background(Color.blue)
-                .foregroundColor(.white)
-                .cornerRadius(8)
-            }
-            .buttonStyle(.plain)
+            // Removed redundant "Add Prompt" button - use the one in the header instead
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
@@ -274,9 +263,6 @@ struct PromptRowView: View {
         let content = promptsManager.usePrompt(prompt)
         NSPasteboard.general.clearContents()
         NSPasteboard.general.setString(content, forType: .string)
-        
-        // Show feedback (could add a toast notification here)
-        NSSound.beep()
     }
 }
 
@@ -290,6 +276,7 @@ struct AddEditPromptView: View {
     @State private var content: String
     @State private var category: PromptCategory
     @State private var tagsText: String
+    @State private var isSaving = false
     
     @Environment(\.dismiss) private var dismiss
     @ObservedObject var promptsManager = AIPromptsManager.shared
@@ -306,43 +293,59 @@ struct AddEditPromptView: View {
     
     var body: some View {
         NavigationView {
-            VStack(spacing: 0) {
-                Form {
-                    Section("Details") {
-                        TextField("Title", text: $title)
-                            .textFieldStyle(.roundedBorder)
+            ScrollView {
+                VStack(alignment: .leading, spacing: 16) {
+                    // Details Section
+                    VStack(alignment: .leading, spacing: 12) {
+                        Text("Details")
+                            .font(.headline)
                         
-                        Picker("Category", selection: $category) {
-                            ForEach(PromptCategory.allCases, id: \.self) { category in
-                                HStack {
-                                    Image(systemName: category.icon)
-                                    Text(category.rawValue)
-                                }
-                                .tag(category)
-                            }
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("Title")
+                                .font(.subheadline)
+                            TextField("Enter prompt title", text: $title)
+                                .textFieldStyle(.roundedBorder)
                         }
-                        .pickerStyle(.menu)
                         
-                        TextField("Tags (comma separated)", text: $tagsText)
-                            .textFieldStyle(.roundedBorder)
-                            .help("Enter tags separated by commas")
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("Category")
+                                .font(.subheadline)
+                            Picker("Category", selection: $category) {
+                                ForEach(PromptCategory.allCases, id: \.self) { category in
+                                    HStack {
+                                        Image(systemName: category.icon)
+                                        Text(category.rawValue)
+                                    }
+                                    .tag(category)
+                                }
+                            }
+                            .pickerStyle(.menu)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+                        
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("Tags")
+                                .font(.subheadline)
+                            TextField("Enter tags separated by commas", text: $tagsText)
+                                .textFieldStyle(.roundedBorder)
+                                .help("Enter tags separated by commas")
+                        }
+                    }
+                    
+                    // Content Section
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Prompt Content")
+                            .font(.headline)
+                        
+                        TextEditor(text: $content)
+                            .font(.body)
+                            .frame(minHeight: 200)
+                            .background(Color(NSColor.controlBackgroundColor))
+                            .cornerRadius(8)
                     }
                 }
-                .frame(height: 140)
-                
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("Prompt Content")
-                        .font(.headline)
-                        .padding(.horizontal)
-                    
-                    TextEditor(text: $content)
-                        .font(.body)
-                        .background(Color(NSColor.controlBackgroundColor))
-                        .cornerRadius(8)
-                        .padding(.horizontal)
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .padding(.bottom)
+                .padding()
+                .frame(maxWidth: .infinity, alignment: .leading)
             }
             .navigationTitle(isEditing ? "Edit Prompt" : "New Prompt")
             .toolbar {
@@ -353,26 +356,64 @@ struct AddEditPromptView: View {
                 }
                 
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Save") {
+                    Button(action: {
                         savePrompt()
+                    }) {
+                        if isSaving {
+                            HStack {
+                                ProgressView()
+                                    .scaleEffect(0.8)
+                                Text("Saving...")
+                            }
+                        } else {
+                            Text("Save")
+                        }
                     }
-                    .disabled(title.isEmpty || content.isEmpty)
+                    .disabled(title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || 
+                             content.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || 
+                             isSaving)
                 }
             }
         }
+        .frame(width: 480, height: 420)
         .presentationSizing(.fitted)
-        .frame(minWidth: 500, idealWidth: 700, maxWidth: 800, minHeight: 400, idealHeight: 550, maxHeight: 600)
     }
     
     private func savePrompt() {
+        // Prevent double-saving
+        guard !isSaving else { return }
+        
+        isSaving = true
+        
+        // Clean up input values
+        let cleanTitle = title.trimmingCharacters(in: .whitespacesAndNewlines)
+        let cleanContent = content.trimmingCharacters(in: .whitespacesAndNewlines)
         let tags = tagsText.split(separator: ",").map { $0.trimmingCharacters(in: .whitespaces) }.filter { !$0.isEmpty }
         
-        if isEditing, let prompt = prompt {
-            promptsManager.updatePrompt(prompt, title: title, content: content, category: category, tags: tags)
-        } else {
-            promptsManager.addPrompt(title: title, content: content, category: category, tags: tags)
-        }
+        // Add some debug logging
+        print("Saving prompt: \(cleanTitle)")
+        print("Category: \(category)")
+        print("Tags: \(tags)")
+        print("Is editing: \(isEditing)")
         
-        dismiss()
+        // Perform the save operation
+        do {
+            if isEditing, let prompt = prompt {
+                promptsManager.updatePrompt(prompt, title: cleanTitle, content: cleanContent, category: category, tags: tags)
+                print("Successfully updated prompt with ID: \(prompt.id)")
+            } else {
+                promptsManager.addPrompt(title: cleanTitle, content: cleanContent, category: category, tags: tags)
+                print("Successfully added new prompt: \(cleanTitle)")
+            }
+            
+            // Small delay to show saving state
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                isSaving = false
+                dismiss()
+            }
+        } catch {
+            print("Error saving prompt: \(error)")
+            isSaving = false
+        }
     }
 }

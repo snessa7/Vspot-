@@ -9,11 +9,16 @@ import SwiftUI
 
 struct CustomTabView: View {
     let tabName: String
+    let searchText: String
     @ObservedObject var customTabManager = CustomTabManager.shared
-    @State private var searchText = ""
     @State private var showingAddItem = false
     @State private var selectedItem: CustomTabItem? = nil
     @State private var showingEditItem = false
+    
+    init(tabName: String, searchText: String = "") {
+        self.tabName = tabName
+        self.searchText = searchText
+    }
     
     private var currentTab: CustomTab? {
         customTabManager.getTab(byName: tabName)
@@ -150,36 +155,29 @@ struct CustomItemRowView: View {
     let onEdit: () -> Void
     @ObservedObject var customTabManager = CustomTabManager.shared
     
+    var primaryValue: String {
+        // Use the first field's value as the title, or "Untitled"
+        if let firstField = tab.fields.first,
+           let value = item.values[firstField.name], !value.isEmpty {
+            return value
+        }
+        return "Untitled"
+    }
+    
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: 12) {
+            // Header with title and main actions
             HStack {
                 Image(systemName: tab.icon)
                     .foregroundColor(.blue)
                 
-                Text(item.values["Username"] ?? "Untitled")
+                Text(primaryValue)
                     .font(.headline)
+                    .lineLimit(1)
                 
                 Spacer()
                 
                 HStack(spacing: 8) {
-                    // Copy username
-                    if let username = item.values["Username"], !username.isEmpty {
-                        Button("Copy User") {
-                            copyToClipboard(username)
-                        }
-                        .buttonStyle(.borderedProminent)
-                        .controlSize(.small)
-                    }
-                    
-                    // Copy password
-                    if let password = item.values["Password"], !password.isEmpty {
-                        Button("Copy Pass") {
-                            copyToClipboard(password)
-                        }
-                        .buttonStyle(.borderedProminent)
-                        .controlSize(.small)
-                    }
-                    
                     Button("Edit") {
                         onEdit()
                     }
@@ -194,6 +192,41 @@ struct CustomItemRowView: View {
                     .foregroundColor(.red)
                 }
             }
+            
+            // All fields with copy buttons
+            VStack(spacing: 8) {
+                ForEach(tab.fields, id: \.id) { field in
+                    if let value = item.values[field.name], !value.isEmpty {
+                        HStack {
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text(field.name)
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                                
+                                if field.isSecure {
+                                    Text("••••••••")
+                                        .font(.body)
+                                        .foregroundColor(.primary)
+                                } else {
+                                    Text(value)
+                                        .font(.body)
+                                        .foregroundColor(.primary)
+                                        .lineLimit(field.type == .multilineText ? 3 : 1)
+                                }
+                            }
+                            
+                            Spacer()
+                            
+                            Button("Copy") {
+                                copyToClipboard(value)
+                            }
+                            .buttonStyle(.borderedProminent)
+                            .controlSize(.mini)
+                        }
+                        .padding(.vertical, 4)
+                    }
+                }
+            }
         }
         .padding()
         .background(Color(NSColor.controlBackgroundColor))
@@ -203,7 +236,6 @@ struct CustomItemRowView: View {
     private func copyToClipboard(_ value: String) {
         NSPasteboard.general.clearContents()
         NSPasteboard.general.setString(value, forType: .string)
-        NSSound.beep()
     }
     
     private func deleteItem() {
@@ -296,9 +328,8 @@ struct AddEditCustomItemView: View {
                 }
             }
         }
+        .frame(width: 480, height: 420)
         .presentationSizing(.fitted)
-        .frame(minWidth: 500, idealWidth: 600, maxWidth: 700, 
-               minHeight: 400, idealHeight: 500, maxHeight: 600)
     }
     
     private func fieldInput(for field: CustomField) -> some View {
@@ -399,6 +430,6 @@ struct AddEditCustomItemView: View {
 
 
 #Preview {
-    CustomTabView(tabName: "Passwords")
+    CustomTabView(tabName: "Passwords", searchText: "")
         .environmentObject(ClipboardManager())
 }

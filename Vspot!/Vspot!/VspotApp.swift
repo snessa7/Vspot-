@@ -95,7 +95,7 @@ struct ContentView: View {
                 case .aiPrompts:
                     AIPromptsView(searchText: searchText)
                 case .custom(let name):
-                    CustomTabView(tabName: name)
+                    CustomTabView(tabName: name, searchText: searchText)
                 }
             }
             
@@ -204,11 +204,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             }
             
             popover.contentSize = NSSize(width: 400, height: 500)
-            popover.behavior = .transient
+            popover.behavior = .transient // Auto-dismiss when clicking outside
+            popover.animates = true
+            
+            // Create shared instances for the menu bar
+            let menuBarAppState = AppState()
+            let menuBarClipboardManager = ClipboardManager()
+            
             popover.contentViewController = NSHostingController(
                 rootView: MenuBarContentView()
-                    .environmentObject(AppState())
-                    .environmentObject(ClipboardManager())
+                    .environmentObject(menuBarAppState)
+                    .environmentObject(menuBarClipboardManager)
             )
         }
     }
@@ -233,37 +239,34 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             
             // Left-click: toggle popover
             if popover.isShown {
-                popover.performClose(nil)
+                closePopover()
             } else {
-                popover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
+                showPopover(relativeTo: button)
             }
         }
+    }
+    
+    func showPopover(relativeTo button: NSStatusBarButton) {
+        popover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
+        
+        // Ensure the popover becomes key window for proper event handling
+        DispatchQueue.main.async {
+            self.popover.contentViewController?.view.window?.makeKey()
+        }
+    }
+    
+    func closePopover() {
+        popover.performClose(nil)
     }
     
     func showContextMenu(_ sender: NSStatusBarButton) {
         let menu = NSMenu()
         
-        menu.addItem(NSMenuItem(title: "Open App", action: #selector(openMainWindow), keyEquivalent: ""))
-        menu.addItem(NSMenuItem.separator())
-        menu.addItem(NSMenuItem(title: "Quit App", action: #selector(quit), keyEquivalent: "q"))
+        menu.addItem(NSMenuItem(title: "Quit", action: #selector(quit), keyEquivalent: "q"))
         
         statusItem?.menu = menu
         statusItem?.button?.performClick(nil)
         statusItem?.menu = nil
-    }
-    
-    @objc func openMainWindow() {
-        // First activate the app
-        NSApplication.shared.activate(ignoringOtherApps: true)
-        
-        // Try to find an existing window or create one
-        if let window = NSApp.windows.first {
-            window.makeKeyAndOrderFront(nil)
-            window.orderFrontRegardless()
-        } else {
-            // If no window exists, create a new one programmatically
-            NSApp.sendAction(Selector("newDocument:"), to: nil, from: nil)
-        }
     }
     
     
