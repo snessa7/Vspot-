@@ -3,135 +3,376 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ClipboardApp - Your MenuBar Clipboard Manager for macOS</title>
+    <title>Vspot! - The Ultimate macOS Clipboard Manager</title>
+    <meta name="description" content="Vspot! is a powerful macOS clipboard manager with AI prompts, custom tabs, and productivity features. Access your clipboard history, manage notes, and boost productivity from your menu bar.">
+    <meta name="keywords" content="macOS, clipboard manager, productivity, menu bar app, AI prompts, notes, custom tabs">
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="apple-touch-icon" href="assets/app-icon.png">
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="container">
-                <div class="logo">
-                    <span class="v-icon">v</span>
-                    <span>ClipboardApp</span>
-                </div>
-                <ul>
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="#download">Download</a></li>
-                    <li><a href="#support">Support</a></li>
-                    <li><a href="privacy.html">Privacy</a></li>
-                </ul>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <img src="assets/app-icon.png" alt="Vspot!" class="nav-logo">
+                <span class="brand-name">Vspot!</span>
             </div>
-        </nav>
-    </header>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#screenshots">Screenshots</a>
+                <a href="#download">Download</a>
+                <a href="privacy.html">Privacy</a>
+            </div>
+        </div>
+    </nav>
 
+    <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <h1>The Ultimate MenuBar Clipboard Manager for macOS</h1>
-            <p>Boost your productivity with smart clipboard history, sticky notes, and customizable tabs - all from your menu bar.</p>
-            <div class="cta-buttons">
-                <a href="#" class="btn btn-primary">Download from Mac App Store</a>
-                <a href="#features" class="btn btn-secondary">Learn More</a>
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>The Ultimate<br><span class="gradient-text">macOS Clipboard Manager</span></h1>
+                    <p class="hero-description">
+                        Supercharge your productivity with Vspot! - a powerful menu bar clipboard manager featuring 
+                        smart history, AI prompts, custom tabs, and seamless workflow integration.
+                    </p>
+                    <div class="hero-features">
+                        <div class="feature-tag">
+                            <span class="feature-icon">📋</span>
+                            Smart Clipboard History
+                        </div>
+                        <div class="feature-tag">
+                            <span class="feature-icon">🤖</span>
+                            AI-Powered Prompts
+                        </div>
+                        <div class="feature-tag">
+                            <span class="feature-icon">📁</span>
+                            Custom Tabs
+                        </div>
+                    </div>
+                    <div class="cta-buttons">
+                        <a href="#download" class="btn btn-primary">
+                            <span class="btn-icon">📱</span>
+                            Get Vspot! Now
+                        </a>
+                        <a href="#features" class="btn btn-secondary">Learn More</a>
+                    </div>
+                    <p class="system-requirements">
+                        <span class="req-icon">💻</span>
+                        Requires macOS 13.0 or later
+                    </p>
+                </div>
+                <div class="hero-visual">
+                    <div class="app-preview">
+                        <img src="assets/app-icon.png" alt="Vspot! App Icon" class="hero-icon">
+                        <div class="floating-elements">
+                            <div class="float-card clipboard">
+                                <span class="card-icon">📋</span>
+                                <span>Clipboard History</span>
+                            </div>
+                            <div class="float-card ai">
+                                <span class="card-icon">🤖</span>
+                                <span>AI Prompts</span>
+                            </div>
+                            <div class="float-card notes">
+                                <span class="card-icon">📝</span>
+                                <span>Quick Notes</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <p class="requirements">Requires macOS 13.0 or later</p>
         </div>
     </section>
 
+    <!-- Features Section -->
     <section id="features" class="features">
         <div class="container">
-            <h2>Powerful Features in a Tiny Package</h2>
-            <div class="feature-grid">
-                <div class="feature">
-                    <div class="icon">📋</div>
+            <div class="section-header">
+                <h2>Powerful Features for Power Users</h2>
+                <p>Everything you need to manage your clipboard and boost productivity, right from your menu bar.</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card primary">
+                    <div class="feature-icon">
+                        <span class="icon-emoji">📋</span>
+                    </div>
                     <h3>Smart Clipboard History</h3>
-                    <p>Never lose copied content again. Access your complete clipboard history with instant search and filters.</p>
+                    <p>Never lose copied content again. Access your complete clipboard history with instant search, filters, and smart organization. Keep track of text, images, and files.</p>
+                    <ul class="feature-list">
+                        <li>Unlimited clipboard history</li>
+                        <li>Smart search and filtering</li>
+                        <li>Supports text, images, and files</li>
+                        <li>Quick access via keyboard shortcuts</li>
+                    </ul>
                 </div>
-                <div class="feature">
-                    <div class="icon">📝</div>
-                    <h3>Sticky Notes</h3>
-                    <p>Create colorful sticky notes right from your menu bar. Perfect for quick thoughts and reminders.</p>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <span class="icon-emoji">🤖</span>
+                    </div>
+                    <h3>AI-Powered Prompts</h3>
+                    <p>Supercharge your workflow with customizable AI prompts. Create, organize, and use AI prompts for writing, coding, communication, and more.</p>
+                    <ul class="feature-list">
+                        <li>Categorized prompt library</li>
+                        <li>Custom prompt creation</li>
+                        <li>Usage tracking and favorites</li>
+                        <li>Tag-based organization</li>
+                    </ul>
                 </div>
-                <div class="feature">
-                    <div class="icon">📁</div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <span class="icon-emoji">📁</span>
+                    </div>
                     <h3>Custom Tabs</h3>
-                    <p>Organize your snippets, passwords, and templates with fully customizable tabs.</p>
+                    <p>Organize your workflows with fully customizable tabs. Create dedicated spaces for passwords, snippets, templates, and any structured data you need.</p>
+                    <ul class="feature-list">
+                        <li>Unlimited custom tabs</li>
+                        <li>Flexible field types</li>
+                        <li>Drag-and-drop reordering</li>
+                        <li>Password-safe storage</li>
+                    </ul>
                 </div>
-                <div class="feature">
-                    <div class="icon">🔒</div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <span class="icon-emoji">📝</span>
+                    </div>
+                    <h3>Quick Notes</h3>
+                    <p>Capture thoughts instantly with integrated note-taking. Perfect for temporary reminders, quick jots, and organizing your ideas on the fly.</p>
+                    <ul class="feature-list">
+                        <li>Instant note creation</li>
+                        <li>Rich text formatting</li>
+                        <li>Searchable content</li>
+                        <li>Auto-save functionality</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <span class="icon-emoji">🔒</span>
+                    </div>
                     <h3>Privacy First</h3>
-                    <p>All data stays local on your Mac. No cloud, no tracking, just pure productivity.</p>
+                    <p>Your data stays private and secure. All information is stored locally on your Mac with no cloud sync, tracking, or data collection.</p>
+                    <ul class="feature-list">
+                        <li>100% local storage</li>
+                        <li>No cloud synchronization</li>
+                        <li>No tracking or analytics</li>
+                        <li>Secure password fields</li>
+                    </ul>
                 </div>
-                <div class="feature">
-                    <div class="icon">⚡</div>
-                    <h3>Lightning Fast</h3>
-                    <p>Optimized for minimal memory usage. Runs quietly in your menu bar without slowing down your Mac.</p>
-                </div>
-                <div class="feature">
-                    <div class="icon">🎨</div>
-                    <h3>Native Design</h3>
-                    <p>Built with SwiftUI for a beautiful, native macOS experience that adapts to your system theme.</p>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <span class="icon-emoji">⚡</span>
+                    </div>
+                    <h3>Native Performance</h3>
+                    <p>Built with SwiftUI for maximum performance and native macOS integration. Minimal memory usage, instant response, and perfect system integration.</p>
+                    <ul class="feature-list">
+                        <li>Native SwiftUI interface</li>
+                        <li>Minimal resource usage</li>
+                        <li>System theme integration</li>
+                        <li>Keyboard shortcuts support</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Screenshots Section -->
+    <section id="screenshots" class="screenshots">
+        <div class="container">
+            <div class="section-header">
+                <h2>See Vspot! in Action</h2>
+                <p>Take a look at Vspot!'s intuitive interface and powerful features designed for macOS.</p>
+            </div>
+            
+            <div class="screenshots-grid">
+                <div class="screenshot-card">
+                    <img src="assets/Screenshot 2025-08-13 at 20.38.27.png" alt="Vspot! Clipboard History Interface" loading="lazy">
+                    <div class="screenshot-info">
+                        <h4>Smart Clipboard History</h4>
+                        <p>Access your complete clipboard history with instant search and filtering</p>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <img src="assets/Screenshot 2025-08-13 at 20.39.12.png" alt="Vspot! AI Prompts Management" loading="lazy">
+                    <div class="screenshot-info">
+                        <h4>AI Prompts Library</h4>
+                        <p>Organize and use AI prompts categorized by purpose and usage</p>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <img src="assets/Screenshot 2025-08-13 at 20.39.43.png" alt="Vspot! Custom Tabs Feature" loading="lazy">
+                    <div class="screenshot-info">
+                        <h4>Custom Tabs</h4>
+                        <p>Create personalized tabs for passwords, snippets, and structured data</p>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <img src="assets/Screenshot 2025-08-13 at 20.40.11.png" alt="Vspot! Notes Interface" loading="lazy">
+                    <div class="screenshot-info">
+                        <h4>Quick Notes</h4>
+                        <p>Capture and organize your thoughts with integrated note-taking</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
     <section id="download" class="download">
         <div class="container">
-            <h2>Ready to Boost Your Productivity?</h2>
-            <p>Available exclusively on the Mac App Store</p>
-            <a href="#" class="btn btn-primary btn-large">Get ClipboardApp</a>
-        </div>
-    </section>
-
-    <section id="support" class="support">
-        <div class="container">
-            <h2>Support</h2>
-            <div class="support-grid">
-                <div class="support-item">
-                    <h3>Documentation</h3>
-                    <p>Learn how to use all features of ClipboardApp</p>
-                    <a href="#">View Docs →</a>
+            <div class="download-content">
+                <div class="download-info">
+                    <h2>Ready to Transform Your Workflow?</h2>
+                    <p>Join thousands of macOS users who have revolutionized their productivity with Vspot!</p>
+                    
+                    <div class="download-features">
+                        <div class="download-feature">
+                            <span class="feature-check">✅</span>
+                            <span>Free to download and use</span>
+                        </div>
+                        <div class="download-feature">
+                            <span class="feature-check">✅</span>
+                            <span>No subscription required</span>
+                        </div>
+                        <div class="download-feature">
+                            <span class="feature-check">✅</span>
+                            <span>Regular updates and improvements</span>
+                        </div>
+                        <div class="download-feature">
+                            <span class="feature-check">✅</span>
+                            <span>Local storage - your data stays private</span>
+                        </div>
+                    </div>
+                    
+                    <div class="download-buttons">
+                        <a href="#" class="btn btn-download">
+                            <span class="btn-icon">📱</span>
+                            Download from Mac App Store
+                        </a>
+                        <p class="download-note">Compatible with macOS 13.0 or later</p>
+                    </div>
                 </div>
-                <div class="support-item">
-                    <h3>Contact</h3>
-                    <p>Have questions? We're here to help</p>
-                    <a href="mailto:support@clipboardapp.com">Email Support →</a>
-                </div>
-                <div class="support-item">
-                    <h3>Updates</h3>
-                    <p>Stay informed about new features and improvements</p>
-                    <a href="#">Release Notes →</a>
+                
+                <div class="download-visual">
+                    <div class="app-icon-showcase">
+                        <img src="assets/app-icon.png" alt="Vspot! App Icon" class="showcase-icon">
+                        <div class="icon-glow"></div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer>
+    <!-- Support Section -->
+    <section class="support">
+        <div class="container">
+            <div class="section-header">
+                <h2>Need Help or Have Questions?</h2>
+                <p>We're here to help you get the most out of Vspot!</p>
+            </div>
+            
+            <div class="support-grid">
+                <div class="support-card">
+                    <div class="support-icon">
+                        <span class="icon-emoji">📖</span>
+                    </div>
+                    <h3>Documentation</h3>
+                    <p>Learn how to use all features of Vspot! with our comprehensive guides and tutorials.</p>
+                    <a href="#" class="support-link">View Documentation →</a>
+                </div>
+                
+                <div class="support-card">
+                    <div class="support-icon">
+                        <span class="icon-emoji">💬</span>
+                    </div>
+                    <h3>Contact Support</h3>
+                    <p>Have questions or need assistance? Our support team is ready to help you succeed.</p>
+                    <a href="mailto:support@vspot.app" class="support-link">Email Support →</a>
+                </div>
+                
+                <div class="support-card">
+                    <div class="support-icon">
+                        <span class="icon-emoji">🔄</span>
+                    </div>
+                    <h3>Updates & News</h3>
+                    <p>Stay informed about new features, improvements, and tips for using Vspot! effectively.</p>
+                    <a href="#" class="support-link">Release Notes →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h4>ClipboardApp</h4>
-                    <p>Your productivity companion for macOS</p>
+                    <div class="footer-brand">
+                        <img src="assets/app-icon.png" alt="Vspot!" class="footer-logo">
+                        <h4>Vspot!</h4>
+                    </div>
+                    <p>The ultimate macOS clipboard manager for power users and productivity enthusiasts.</p>
                 </div>
+                
+                <div class="footer-section">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#screenshots">Screenshots</a></li>
+                        <li><a href="#download">Download</a></li>
+                        <li><a href="#">System Requirements</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="mailto:support@vspot.app">Contact Support</a></li>
+                        <li><a href="#">Release Notes</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                
                 <div class="footer-section">
                     <h4>Legal</h4>
                     <ul>
                         <li><a href="privacy.html">Privacy Policy</a></li>
                         <li><a href="#">Terms of Service</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Connect</h4>
-                    <ul>
-                        <li><a href="#">Twitter</a></li>
-                        <li><a href="#">GitHub</a></li>
+                        <li><a href="#">License</a></li>
                     </ul>
                 </div>
             </div>
+            
             <div class="footer-bottom">
-                <p>&copy; 2024 ClipboardApp. All rights reserved.</p>
+                <p>&copy; 2024 Vspot!. All rights reserved. Made with ❤️ for macOS users.</p>
             </div>
         </div>
     </footer>
+
+    <!-- Smooth scrolling script -->
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
