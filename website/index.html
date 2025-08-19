@@ -509,18 +509,18 @@
         });
 
         // Intersection Observer for animations
-        const observerOptions = {
+        const fadeInObserverOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
         };
 
-        const observer = new IntersectionObserver((entries) => {
+        const fadeInObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.style.animation = 'fadeInUp 0.6s ease-out forwards';
                 }
             });
-        }, observerOptions);
+        }, fadeInObserverOptions);
 
         // Enhanced loading animations with intersection observer
         document.addEventListener('DOMContentLoaded', () => {
@@ -572,12 +572,12 @@
         
         // Enhanced Intersection Observer for Section Transitions
         const createIntersectionObserver = () => {
-            const observerOptions = {
+            const sectionObserverOptions = {
                 threshold: 0.1,
                 rootMargin: '0px 0px -50px 0px'
             };
             
-            const observer = new IntersectionObserver((entries) => {
+            const sectionObserver = new IntersectionObserver((entries) => {
                 entries.forEach((entry, index) => {
                     if (entry.isIntersecting) {
                         // Add staggered animation delay
@@ -594,7 +594,7 @@
                         }, index * 150);
                     }
                 });
-            }, observerOptions);
+            }, sectionObserverOptions);
             
             // Observe sections and cards
             const elementsToObserve = document.querySelectorAll(
@@ -605,7 +605,7 @@
                 el.classList.add('scroll-reveal');
                 if (index % 3 === 1) el.classList.add('scroll-reveal-left');
                 if (index % 3 === 2) el.classList.add('scroll-reveal-right');
-                observer.observe(el);
+                sectionObserver.observe(el);
             });
         };
         
@@ -749,7 +749,7 @@
                     }, index * 100);
                 }
             });
-        }, observerOptions);
+        }, fadeInObserverOptions);
         
         // Enhanced button interactions
         document.querySelectorAll('.btn').forEach(btn => {
