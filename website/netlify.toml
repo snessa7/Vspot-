@@ -17,3 +17,9 @@
     X-XSS-Protection = "1; mode=block"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Form notifications - Netlify will handle forwarding
+[[redirects]]
+  from = "/contact"
+  to = "/"
+  status = 200

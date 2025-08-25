@@ -623,7 +623,7 @@ Search functionality became extremely slow when users had more than 1000 clipboa
    - Improve copy and messaging to highlight unique AI prompt management feature
    - Create compelling value propositions for power users and content creators
    - Add professional screenshots that match the enhanced UI improvements
-   - Set up auto-forwarding service on Netlify (target: snessa7@icloud.com)
+   - Set up auto-forwarding service on Netlify (target: contact@vspot.app)
 2. **Data Migration Testing**: Test Core Data migration with large datasets
 3. **Security Implementation**: Complete CryptoKit encryption implementation
 4. **Performance Optimization**: Implement pagination for large datasets
