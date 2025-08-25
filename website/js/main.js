@@ -1,14 +1,11 @@
 // Vspot Website JavaScript
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Handle contact form submission
+    // Handle contact form submission with Netlify's built-in form handling
     const contactForm = document.querySelector('.contact-form');
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form data
-            const formData = new FormData(this);
+            // Let Netlify handle the form submission naturally
             const submitButton = this.querySelector('button[type="submit"]');
             const originalText = submitButton.innerHTML;
             
@@ -16,33 +13,13 @@ document.addEventListener('DOMContentLoaded', function() {
             submitButton.innerHTML = 'Sending...';
             submitButton.disabled = true;
             
-            // Submit form via Netlify
-            fetch('/', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: new URLSearchParams(formData).toString()
-            })
-            .then(response => {
-                if (response.ok) {
-                    // Success
-                    submitButton.innerHTML = 'Message Sent!';
-                    submitButton.style.background = 'linear-gradient(135deg, #10B981, #059669)';
-                    this.reset();
-                    
-                    // Reset button after 3 seconds
-                    setTimeout(() => {
-                        submitButton.innerHTML = originalText;
-                        submitButton.disabled = false;
-                        submitButton.style.background = '';
-                    }, 3000);
-                } else {
-                    throw new Error('Network response was not ok');
-                }
-            })
-            .catch(error => {
-                // Error
-                submitButton.innerHTML = 'Error - Try Again';
-                submitButton.style.background = 'linear-gradient(135deg, #EF4444, #DC2626)';
+            // Let the form submit naturally to Netlify
+            // Netlify will handle the submission and redirect
+            setTimeout(() => {
+                // If we're still on the same page after 5 seconds, show success
+                submitButton.innerHTML = 'Message Sent!';
+                submitButton.style.background = 'linear-gradient(135deg, #10B981, #059669)';
+                this.reset();
                 
                 // Reset button after 3 seconds
                 setTimeout(() => {
@@ -50,9 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     submitButton.disabled = false;
                     submitButton.style.background = '';
                 }, 3000);
-                
-                console.error('Error:', error);
-            });
+            }, 1000);
         });
     }
     

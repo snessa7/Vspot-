@@ -1,22 +1,15 @@
 [build]
   publish = "."
 
-# Form handling configuration
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
 
-# Form processing
-[functions]
-  directory = "functions"
-
-# Development settings
 [dev]
   port = 8888
   publish = "."
 
-# Security headers
 [[headers]]
   for = "/*"
   [headers.values]
@@ -24,16 +17,3 @@
     X-XSS-Protection = "1; mode=block"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
-
-# Form notifications
-[forms]
-  [forms.contact]
-    name = "contact"
-    action = "/"
-    method = "POST"
-    honeypot = "bot-field"
-    [forms.contact.fields]
-      name = { required = true }
-      email = { required = true }
-      subject = { required = true }
-      message = { required = true }
