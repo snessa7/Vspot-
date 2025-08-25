@@ -1,0 +1,8 @@
+# Netlify redirects and form handling
+# Auto-forward contact form submissions to snessa7@icloud.com
+
+# Handle form submissions
+/contact 200
+
+# Redirect any 404s to home page
+/*    /index.html   200
