@@ -1,7 +1,7 @@
 # Vspot Marketing Website
 
 ## 🌐 **Live Site**
-- **URL**: https://vspot-app.netlify.app
+- **URL**: https://vspot.netlify.app
 - **Netlify Site ID**: 12ba0115-cb60-4bf8-8565-19b3eaef78f6
 - **Status**: Live and deployed
 
@@ -25,7 +25,7 @@ Vspot's official marketing website showcasing the AI-powered clipboard manager f
 
 - **Framework**: Vanilla HTML/CSS/JavaScript
 - **Hosting**: Netlify
-- **Domain**: vspot-app.netlify.app
+- **Domain**: vspot.netlify.app
 - **Form Handling**: Netlify Forms with auto-forwarding
 - **Design**: Custom CSS with modern gradients and animations
 - **Fonts**: Montserrat (headings) + Inter (body text)
@@ -126,7 +126,7 @@ website/
 2. **Testing**: Preview locally or in Netlify preview
 3. **Commit**: `git add . && git commit -m "message"`
 4. **Deploy**: `git push origin main` (auto-deploys to Netlify)
-5. **Verify**: Check live site at https://vspot-app.netlify.app
+5. **Verify**: Check live site at https://vspot.netlify.app
 
 ## 📈 **Conversion Goals**
 
