@@ -172,7 +172,7 @@ website/
 - **GitHub Repository**: https://github.com/snessa7/Vspot-.git
 - **Netlify Dashboard**: https://app.netlify.com/sites/vspot-app
 - **App Store**: Coming soon
-- **Support Email**: support@vspot.app
+- **Support Email**: snessa7@icloud.com
 
 ---
 
