@@ -48,6 +48,17 @@ struct NotesView: View {
                         
                         Spacer()
                         
+                        // Copy button for existing notes
+                        if noteToEdit != nil {
+                            Button(action: {
+                                copyNoteContent()
+                            }) {
+                                Image(systemName: "doc.on.doc")
+                                Text("Copy")
+                            }
+                            .buttonStyle(.plain)
+                        }
+                        
                         Button("Save") {
                             saveNote()
                         }
@@ -213,6 +224,18 @@ struct NotesView: View {
         }
         cancelEdit()
     }
+    
+    private func copyNoteContent() {
+        let contentToCopy = editorTitle.isEmpty ? editorContent : "\(editorTitle)\n\n\(editorContent)"
+        NSPasteboard.general.clearContents()
+        NSPasteboard.general.setString(contentToCopy, forType: .string)
+    }
+    
+    private func copyNoteToClipboard(_ note: Note) {
+        let contentToCopy = note.title.isEmpty ? note.content : "\(note.title)\n\n\(note.content)"
+        NSPasteboard.general.clearContents()
+        NSPasteboard.general.setString(contentToCopy, forType: .string)
+    }
 }
 
 struct NoteCard: View {
@@ -245,16 +268,31 @@ struct NoteCard: View {
             .cornerRadius(5)
             
             if isHovered {
-                Button(action: {
-                    notesManager.deleteNote(note)
-                }) {
-                    Image(systemName: "xmark.circle.fill")
-                        .font(.system(size: 12))
-                        .foregroundColor(.red)
-                        .background(Color.white.opacity(0.8))
-                        .clipShape(Circle())
+                HStack(spacing: 4) {
+                    Button(action: {
+                        let contentToCopy = note.title.isEmpty ? note.content : "\(note.title)\n\n\(note.content)"
+                        NSPasteboard.general.clearContents()
+                        NSPasteboard.general.setString(contentToCopy, forType: .string)
+                    }) {
+                        Image(systemName: "doc.on.clipboard")
+                            .font(.system(size: 10))
+                            .foregroundColor(.blue)
+                            .background(Color.white.opacity(0.8))
+                            .clipShape(Circle())
+                    }
+                    .buttonStyle(.plain)
+                    
+                    Button(action: {
+                        notesManager.deleteNote(note)
+                    }) {
+                        Image(systemName: "xmark.circle.fill")
+                            .font(.system(size: 10))
+                            .foregroundColor(.red)
+                            .background(Color.white.opacity(0.8))
+                            .clipShape(Circle())
+                    }
+                    .buttonStyle(.plain)
                 }
-                .buttonStyle(.plain)
                 .offset(x: -2, y: 2)
             }
         }

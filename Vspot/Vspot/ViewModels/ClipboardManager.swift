@@ -2,12 +2,13 @@
 //  ClipboardManager.swift
 //  Vspot
 //
-//  Manages clipboard monitoring and history
+//  Manages clipboard monitoring and history with Core Data
 //
 
 import Foundation
 import AppKit
 import Combine
+import CoreData
 
 class ClipboardManager: ObservableObject {
     @Published var items: [ClipboardItem] = []
@@ -15,6 +16,7 @@ class ClipboardManager: ObservableObject {
     private var pasteboardService: PasteboardService?
     private var cancellables = Set<AnyCancellable>()
     private let maxItems = 100
+    private let coreDataManager = CoreDataManager.shared
     
     init() {
         loadItems()
@@ -33,23 +35,56 @@ class ClipboardManager: ObservableObject {
     }
     
     func addItem(content: String, type: PasteboardType) {
-        // Check for duplicates
-        if let existingIndex = items.firstIndex(where: { $0.content == content }) {
-            // Move to top if already exists
-            let existingItem = items.remove(at: existingIndex)
-            items.insert(existingItem, at: 0)
-        } else {
-            // Add new item
-            let newItem = ClipboardItem(content: content, type: type)
-            items.insert(newItem, at: 0)
-            
-            // Maintain max items limit
-            if items.count > maxItems {
-                items = Array(items.prefix(maxItems))
-            }
-        }
+        // Check for duplicates in Core Data
+        let fetchRequest: NSFetchRequest<CDClipboardItem> = CDClipboardItem.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "content == %@", content)
         
-        saveItems()
+        do {
+            let existingItems = try coreDataManager.context.fetch(fetchRequest)
+            
+            if let existingItem = existingItems.first {
+                // Update existing item timestamp
+                existingItem.updatedAt = Date()
+                coreDataManager.save()
+                
+                // Reload items to reflect changes
+                loadItems()
+            } else {
+                // Create new item in Core Data
+                let cdItem = CDClipboardItem(context: coreDataManager.context)
+                cdItem.id = UUID()
+                cdItem.content = content
+                cdItem.type = type.rawValue
+                cdItem.preview = ClipboardItem.generatePreview(from: content, type: type)
+                cdItem.isFavorite = false
+                cdItem.isEncrypted = false
+                cdItem.createdAt = Date()
+                cdItem.updatedAt = Date()
+                
+                coreDataManager.save()
+                
+                // Reload items to reflect changes
+                loadItems()
+                
+                // Maintain max items limit
+                if items.count > maxItems {
+                    // Delete oldest items from Core Data
+                    let oldestFetchRequest: NSFetchRequest<CDClipboardItem> = CDClipboardItem.fetchRequest()
+                    oldestFetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \CDClipboardItem.updatedAt, ascending: true)]
+                    oldestFetchRequest.fetchLimit = items.count - maxItems
+                    
+                    if let oldestItems = try? coreDataManager.context.fetch(oldestFetchRequest) {
+                        for item in oldestItems {
+                            coreDataManager.context.delete(item)
+                        }
+                        coreDataManager.save()
+                        loadItems()
+                    }
+                }
+            }
+        } catch {
+            print("Error adding clipboard item: \(error)")
+        }
     }
     
     func copyToPasteboard(_ item: ClipboardItem) {
@@ -57,44 +92,102 @@ class ClipboardManager: ObservableObject {
         pasteboard.clearContents()
         pasteboard.setString(item.content, forType: .string)
         
-        // Move to top of list
-        if let index = items.firstIndex(where: { $0.id == item.id }) {
-            items.remove(at: index)
-            items.insert(item, at: 0)
-            saveItems()
+        // Update timestamp in Core Data to move to top
+        let fetchRequest: NSFetchRequest<CDClipboardItem> = CDClipboardItem.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "id == %@", item.id as CVarArg)
+        
+        do {
+            if let cdItem = try coreDataManager.context.fetch(fetchRequest).first {
+                cdItem.updatedAt = Date()
+                coreDataManager.save()
+                loadItems()
+            }
+        } catch {
+            print("Error updating clipboard item: \(error)")
         }
     }
     
     func toggleFavorite(_ item: ClipboardItem) {
-        if let index = items.firstIndex(where: { $0.id == item.id }) {
-            items[index].isFavorite.toggle()
-            saveItems()
+        let fetchRequest: NSFetchRequest<CDClipboardItem> = CDClipboardItem.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "id == %@", item.id as CVarArg)
+        
+        do {
+            if let cdItem = try coreDataManager.context.fetch(fetchRequest).first {
+                cdItem.isFavorite.toggle()
+                coreDataManager.save()
+                loadItems()
+            }
+        } catch {
+            print("Error toggling favorite: \(error)")
         }
     }
     
     func deleteItem(_ item: ClipboardItem) {
-        items.removeAll { $0.id == item.id }
-        saveItems()
+        let fetchRequest: NSFetchRequest<CDClipboardItem> = CDClipboardItem.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "id == %@", item.id as CVarArg)
+        
+        do {
+            if let cdItem = try coreDataManager.context.fetch(fetchRequest).first {
+                coreDataManager.context.delete(cdItem)
+                coreDataManager.save()
+                loadItems()
+            }
+        } catch {
+            print("Error deleting clipboard item: \(error)")
+        }
     }
     
     func clearAll() {
-        items.removeAll()
-        saveItems()
+        let fetchRequest: NSFetchRequest<CDClipboardItem> = CDClipboardItem.fetchRequest()
+        
+        do {
+            let allItems = try coreDataManager.context.fetch(fetchRequest)
+            for item in allItems {
+                coreDataManager.context.delete(item)
+            }
+            coreDataManager.save()
+            loadItems()
+        } catch {
+            print("Error clearing all items: \(error)")
+        }
     }
     
     private func loadItems() {
-        // Load from UserDefaults for now (will use Core Data later)
-        if let data = UserDefaults.standard.data(forKey: "clipboardItems"),
-           let decoded = try? JSONDecoder().decode([ClipboardItem].self, from: data) {
-            items = decoded
+        let fetchRequest: NSFetchRequest<CDClipboardItem> = CDClipboardItem.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \CDClipboardItem.updatedAt, ascending: false)]
+        fetchRequest.fetchLimit = maxItems
+        
+        do {
+            let cdItems = try coreDataManager.context.fetch(fetchRequest)
+            items = cdItems.compactMap { cdItem in
+                guard let id = cdItem.id,
+                      let content = cdItem.content,
+                      let typeString = cdItem.type,
+                      let type = PasteboardType(rawValue: typeString),
+                      let _ = cdItem.preview,
+                      let _ = cdItem.createdAt,
+                      let updatedAt = cdItem.updatedAt else {
+                    return nil
+                }
+                
+                return ClipboardItem(
+                    id: id,
+                    content: content,
+                    type: type,
+                    timestamp: updatedAt,
+                    isFavorite: cdItem.isFavorite,
+                    isEncrypted: cdItem.isEncrypted
+                )
+            }
+        } catch {
+            print("Error loading clipboard items: \(error)")
         }
     }
     
     private func saveItems() {
-        // Save to UserDefaults for now (will use Core Data later)
-        if let encoded = try? JSONEncoder().encode(items) {
-            UserDefaults.standard.set(encoded, forKey: "clipboardItems")
-        }
+        // Core Data automatically saves when context changes
+        // This method is kept for compatibility but doesn't need to do anything
+        // as the Core Data manager handles saving
     }
     
     deinit {

@@ -351,10 +351,17 @@ struct SearchBar: View {
                 .foregroundColor(.secondary)
             TextField("Search...", text: $text)
                 .textFieldStyle(.plain)
+                .onSubmit {
+                    // Optional: Add any search submission behavior here
+                }
         }
         .padding(6)
         .background(Color.gray.opacity(0.1))
         .cornerRadius(6)
+        .overlay(
+            RoundedRectangle(cornerRadius: 6)
+                .stroke(Color.gray.opacity(0.2), lineWidth: 1)
+        )
     }
 }
 
@@ -402,59 +409,57 @@ struct AddCustomTabView: View {
     ]
     
     var body: some View {
-        NavigationView {
-            VStack(spacing: 20) {
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("Tab Name")
-                        .font(.headline)
-                    
-                    TextField("Enter tab name", text: $tabName)
-                        .textFieldStyle(.roundedBorder)
-                }
+        VStack(spacing: 20) {
+            VStack(alignment: .leading, spacing: 8) {
+                Text("Tab Name")
+                    .font(.headline)
                 
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("Icon")
-                        .font(.headline)
-                    
-                    LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 8), count: 6), spacing: 8) {
-                        ForEach(availableIcons, id: \.self) { icon in
-                            Button(action: { selectedIcon = icon }) {
-                                Image(systemName: icon)
-                                    .font(.system(size: 18))
-                                    .foregroundColor(selectedIcon == icon ? .white : .primary)
-                                    .frame(width: 36, height: 36)
-                                    .background(selectedIcon == icon ? Color.blue : Color.gray.opacity(0.15))
-                                    .cornerRadius(6)
-                            }
-                            .buttonStyle(.plain)
-                            .help(icon)
+                TextField("Enter tab name", text: $tabName)
+                    .textFieldStyle(.roundedBorder)
+            }
+            
+            VStack(alignment: .leading, spacing: 8) {
+                Text("Icon")
+                    .font(.headline)
+                
+                LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 8), count: 6), spacing: 8) {
+                    ForEach(availableIcons, id: \.self) { icon in
+                        Button(action: { selectedIcon = icon }) {
+                            Image(systemName: icon)
+                                .font(.system(size: 18))
+                                .foregroundColor(selectedIcon == icon ? .white : .primary)
+                                .frame(width: 36, height: 36)
+                                .background(selectedIcon == icon ? Color.blue : Color.gray.opacity(0.15))
+                                .cornerRadius(6)
                         }
+                        .buttonStyle(.plain)
+                        .help(icon)
                     }
-                    .padding(.horizontal, 4)
                 }
-                
-                Toggle("Secure Tab (for sensitive data)", isOn: $isSecure)
+                .padding(.horizontal, 4)
+            }
+            
+            Toggle("Secure Tab (for sensitive data)", isOn: $isSecure)
+            
+            Spacer()
+            
+            HStack {
+                Button("Cancel") {
+                    dismiss()
+                }
+                .buttonStyle(.bordered)
                 
                 Spacer()
-            }
-            .padding()
-            .navigationTitle("New Custom Tab")
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") {
-                        dismiss()
-                    }
-                }
                 
-                ToolbarItem(placement: .confirmationAction) {
-                    Button("Create") {
-                        createTab()
-                    }
-                    .disabled(tabName.isEmpty)
+                Button("Create") {
+                    createTab()
                 }
+                .buttonStyle(.borderedProminent)
+                .disabled(tabName.isEmpty)
             }
         }
-        .frame(width: 480, height: 420)
+        .padding()
+        .frame(width: 400, height: 350)
         .presentationSizing(.fitted)
     }
     

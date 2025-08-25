@@ -35,7 +35,7 @@ struct ClipboardItem: Identifiable, Codable, Equatable {
         self.preview = Self.generatePreview(from: content, type: type)
     }
     
-    private static func generatePreview(from content: String, type: PasteboardType) -> String {
+    static func generatePreview(from content: String, type: PasteboardType) -> String {
         let maxLength = 100
         let trimmed = content.trimmingCharacters(in: .whitespacesAndNewlines)
         

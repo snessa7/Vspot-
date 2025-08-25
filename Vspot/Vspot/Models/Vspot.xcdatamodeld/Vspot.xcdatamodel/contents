@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22522" systemVersion="23C71" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+    <entity name="CDClipboardItem" representedClassName="CDClipboardItem" syncable="YES" codeGenerationType="class">
+        <attribute name="content" optional="NO" attributeType="String" defaultValueString=""/>
+        <attribute name="createdAt" optional="NO" attributeType="Date" usesScalarValueType="NO" defaultDateTimeInterval="0"/>
+        <attribute name="id" optional="NO" attributeType="UUID" usesScalarValueType="NO" defaultValueString="00000000-0000-0000-0000-000000000000"/>
+        <attribute name="isEncrypted" optional="NO" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="isFavorite" optional="NO" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="preview" optional="NO" attributeType="String" defaultValueString=""/>
+        <attribute name="type" optional="NO" attributeType="String" defaultValueString="text"/>
+        <attribute name="updatedAt" optional="NO" attributeType="Date" usesScalarValueType="NO" defaultDateTimeInterval="0"/>
+    </entity>
+    <entity name="CDNote" representedClassName="CDNote" syncable="YES" codeGenerationType="class">
+        <attribute name="color" optional="NO" attributeType="String" defaultValueString="yellow"/>
+        <attribute name="content" optional="NO" attributeType="String" defaultValueString=""/>
+        <attribute name="createdAt" optional="NO" attributeType="Date" usesScalarValueType="NO" defaultDateTimeInterval="0"/>
+        <attribute name="id" optional="NO" attributeType="UUID" usesScalarValueType="NO" defaultValueString="00000000-0000-0000-0000-000000000000"/>
+        <attribute name="isEncrypted" optional="NO" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="lastModified" optional="NO" attributeType="Date" usesScalarValueType="NO" defaultDateTimeInterval="0"/>
+        <attribute name="tags" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[String]"/>
+        <attribute name="title" optional="NO" attributeType="String" defaultValueString="Untitled"/>
+    </entity>
+    <entity name="CDAIPrompt" representedClassName="CDAIPrompt" syncable="YES" codeGenerationType="class">
+        <attribute name="category" optional="NO" attributeType="String" defaultValueString="general"/>
+        <attribute name="content" optional="NO" attributeType="String" defaultValueString=""/>
+        <attribute name="createdAt" optional="NO" attributeType="Date" usesScalarValueType="NO" defaultDateTimeInterval="0"/>
+        <attribute name="id" optional="NO" attributeType="UUID" usesScalarValueType="NO" defaultValueString="00000000-0000-0000-0000-000000000000"/>
+        <attribute name="isEncrypted" optional="NO" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="isFavorite" optional="NO" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="tags" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[String]"/>
+        <attribute name="title" optional="NO" attributeType="String" defaultValueString="Untitled Prompt"/>
+        <attribute name="useCount" optional="NO" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="CDCustomTab" representedClassName="CDCustomTab" syncable="YES" codeGenerationType="class">
+        <attribute name="createdAt" optional="NO" attributeType="Date" usesScalarValueType="NO" defaultDateTimeInterval="0"/>
+        <attribute name="fields" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[String]"/>
+        <attribute name="id" optional="NO" attributeType="UUID" usesScalarValueType="NO" defaultValueString="00000000-0000-0000-0000-000000000000"/>
+        <attribute name="isEncrypted" optional="NO" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="isSecure" optional="NO" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="name" optional="NO" attributeType="String" defaultValueString="New Tab"/>
+        <attribute name="order" optional="NO" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="values" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[String]"/>
+    </entity>
+</model>

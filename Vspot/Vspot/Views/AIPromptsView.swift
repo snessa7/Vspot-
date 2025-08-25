@@ -375,7 +375,7 @@ struct AddEditPromptView: View {
                 }
             }
         }
-        .frame(width: 480, height: 420)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .presentationSizing(.fitted)
     }
     
