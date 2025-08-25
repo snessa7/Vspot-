@@ -76,7 +76,7 @@ website/
 ## 🔧 **Features**
 
 ### **Contact Form**
-- **Auto-forwarding**: All submissions sent to `contact@vspot.app` (Netlify form forwarding)
+- **Auto-forwarding**: All submissions handled by Netlify forms (configured through dashboard)
 - **Spam Protection**: Netlify honeypot field
 - **User Feedback**: Loading states and success/error messages
 - **Form Fields**: Name, Email, Subject, Message
@@ -104,7 +104,7 @@ website/
 ### **Form Processing**
 - **Endpoint**: `/contact`
 - **Method**: POST
-- **Auto-forward**: Enabled to contact@vspot.app (Netlify form forwarding)
+- **Auto-forward**: Configured through Netlify dashboard
 - **Spam Filtering**: Netlify's built-in protection
 
 ## 📊 **Analytics & Tracking**
@@ -172,7 +172,7 @@ website/
 - **GitHub Repository**: https://github.com/snessa7/Vspot-.git
 - **Netlify Dashboard**: https://app.netlify.com/sites/vspot-app
 - **App Store**: Coming soon
-- **Support Email**: contact@vspot.app
+- **Contact Method**: Form-based (no email address exposed)
 
 ---
 
