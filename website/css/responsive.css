@@ -1,5 +1,28 @@
 /* Responsive Design */
 
+/* Mobile Touch Improvements */
+@media (hover: none) and (pointer: coarse) {
+    /* Increase touch targets for mobile */
+    .cta-button {
+        min-height: 48px;
+        padding: 1.25rem 2rem;
+    }
+    
+    .faq-question {
+        padding: 1.75rem 1.5rem;
+    }
+    
+    .footer-link {
+        padding: 0.5rem 0;
+        display: inline-block;
+    }
+    
+    /* Smooth scrolling for iOS */
+    * {
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
 /* Tablet Styles (768px - 1299px) */
 @media (max-width: 1299px) {
     .container {
@@ -123,6 +146,23 @@
     .cta-button {
         padding: 1rem 2rem;
         font-size: 1rem;
+        width: 100%;
+        max-width: 320px;
+    }
+    
+    /* Improve mobile spacing */
+    .hero-cta {
+        width: 100%;
+    }
+    
+    /* Better mobile contact form */
+    .contact-content {
+        gap: 2rem;
+    }
+    
+    /* Testimonials stacked on mobile */
+    .testimonials-grid {
+        grid-template-columns: 1fr;
     }
 }
 
@@ -175,6 +215,17 @@
     .footer-right {
         flex-direction: column;
         gap: 0.5rem;
+    }
+    
+    /* Mobile-friendly pricing card */
+    .pricing-card {
+        padding: 2rem 1.5rem;
+    }
+    
+    /* Mobile FAQ improvements */
+    .faq-question h3 {
+        font-size: 1rem;
+        line-height: 1.4;
     }
 }
 

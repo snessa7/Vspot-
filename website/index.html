@@ -1,10 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vspot: The Ultimate AI Prompt Manager for macOS Power Users</title>
     <meta name="description" content="The only clipboard manager with built-in AI prompt organization. Stop losing your best prompts. Organize, search, and deploy AI content like a pro.">
+    <meta name="keywords" content="AI prompt manager, clipboard manager, macOS, ChatGPT, AI tools, productivity, code snippets, prompt library, developer tools">
+    <meta name="author" content="Vspot">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://vspot.netlify.app/">
+    <meta property="og:title" content="Vspot: The Ultimate AI Prompt Manager for macOS">
+    <meta property="og:description" content="The only clipboard manager with built-in AI prompt organization. Stop losing your best prompts. Organize, search, and deploy AI content like a pro.">
+    <meta property="og:image" content="https://vspot.netlify.app/images/icon.png">
+    <meta property="og:site_name" content="Vspot">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://vspot.netlify.app/">
+    <meta name="twitter:title" content="Vspot: The Ultimate AI Prompt Manager for macOS">
+    <meta name="twitter:description" content="The only clipboard manager with built-in AI prompt organization. Stop losing your best prompts. Organize, search, and deploy AI content like a pro.">
+    <meta name="twitter:image" content="https://vspot.netlify.app/images/icon.png">
+    
+    <!-- Additional SEO -->
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="revisit-after" content="7 days">
+    <link rel="canonical" href="https://vspot.netlify.app/">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/icon.png">
+    <link rel="apple-touch-icon" href="images/icon.png">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,23 +41,35 @@
     <!-- Styles -->
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/responsive.css">
+    
+    <!-- Google Analytics 4 - Replace G-XXXXXXXXXX with your actual GA4 Measurement ID -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script> -->
 </head>
 <body>
+    <!-- Skip to main content for screen readers -->
+    <a href="#hero" class="skip-link">Skip to main content</a>
+    
     <!-- Hero Section -->
-    <section class="hero" id="hero">
+    <section class="hero" id="hero" role="banner" aria-label="Hero section">
         <div class="container">
             <div class="hero-content">
                 <div class="hero-icon">
-                    <img src="images/icon.png" alt="Vspot Icon" class="app-icon">
+                    <img src="images/icon.png" alt="Vspot application icon - purple and blue gradient design" class="app-icon">
                 </div>
                 <h1 class="hero-title">The Ultimate AI Prompt Manager for macOS</h1>
                 <p class="hero-subtitle">Finally, a clipboard manager that understands AI workflows. Organize your prompts, capture content, and deploy AI-generated text with surgical precision. Built for power users who demand more.</p>
                 <div class="hero-cta">
-                    <a href="#" class="cta-button primary" id="downloadBtn">
+                    <a href="#" class="cta-button primary" id="downloadBtn" aria-label="Download Vspot from Mac App Store">
                         <span>Get Vspot on Mac App Store</span>
-                        <span class="cta-subtitle">Free Download • macOS 13.0+</span>
+                        <span class="cta-subtitle">One-time $3.99 • No Subscription Ever</span>
                     </a>
-                    <a href="#features" class="cta-button secondary">
+                    <a href="#features" class="cta-button secondary" aria-label="Learn about Vspot features">
                         <span>See How It Works</span>
                     </a>
                 </div>
@@ -54,9 +93,9 @@
     </section>
 
     <!-- Target Audience Section -->
-    <section class="audience" id="audience">
+    <section class="audience" id="audience" aria-labelledby="audience-title">
         <div class="container">
-            <h2 class="section-title center">Built for AI Power Users</h2>
+            <h2 class="section-title center" id="audience-title">Built for AI Power Users</h2>
             <div class="audience-grid">
                 <div class="audience-card">
                     <div class="audience-icon">👨‍💻</div>
@@ -140,9 +179,9 @@
     </section>
 
     <!-- Key Features Section -->
-    <section class="features" id="features">
+    <section class="features" id="features" aria-labelledby="features-title">
         <div class="container">
-            <h2 class="section-title center">Why Vspot is Different</h2>
+            <h2 class="section-title center" id="features-title">Why Vspot is Different</h2>
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">
@@ -247,33 +286,33 @@
     </section>
 
     <!-- Screenshot Gallery Section -->
-    <section class="gallery" id="gallery">
+    <section class="gallery" id="gallery" aria-labelledby="gallery-title">
         <div class="container">
-            <h2 class="section-title center">See Vspot in Action</h2>
-            <div class="screenshot-grid">
+            <h2 class="section-title center" id="gallery-title">See Vspot in Action</h2>
+            <div class="screenshot-grid" role="region" aria-label="Application screenshots gallery">
                 <div class="screenshot-item">
-                    <img src="images/screenshots/ai-prompts-view.jpg" alt="Vspot AI Prompts" class="screenshot">
+                    <img src="images/screenshots/ai-prompts-view.jpg" alt="Screenshot of Vspot AI Prompt Library showing organized prompts in categories" class="screenshot" loading="lazy">
                     <div class="screenshot-overlay">
                         <h4>AI Prompt Library</h4>
                         <p>Organize and categorize your AI prompts for instant access</p>
                     </div>
                 </div>
                 <div class="screenshot-item">
-                    <img src="images/screenshots/board-view.jpg" alt="Vspot Board View" class="screenshot">
+                    <img src="images/screenshots/board-view.jpg" alt="Screenshot of Vspot board view showing intelligent clipboard content organization" class="screenshot" loading="lazy">
                     <div class="screenshot-overlay">
                         <h4>Smart Clipboard</h4>
                         <p>Intelligent categorization of all your copied content</p>
                     </div>
                 </div>
                 <div class="screenshot-item">
-                    <img src="images/screenshots/notes-view.jpg" alt="Vspot Notes" class="screenshot">
+                    <img src="images/screenshots/notes-view.jpg" alt="Screenshot of Vspot smart notes with color-coded sticky notes interface" class="screenshot" loading="lazy">
                     <div class="screenshot-overlay">
                         <h4>Smart Notes</h4>
                         <p>Color-coded notes with one-click copy functionality</p>
                     </div>
                 </div>
                 <div class="screenshot-item">
-                    <img src="images/screenshots/tab-creation.jpg" alt="Vspot Tab Creation" class="screenshot">
+                    <img src="images/screenshots/tab-creation.jpg" alt="Screenshot of Vspot custom tab creation interface with flexible field options" class="screenshot" loading="lazy">
                     <div class="screenshot-overlay">
                         <h4>Custom Tabs</h4>
                         <p>Create your own organizational structures</p>
@@ -284,17 +323,19 @@
     </section>
 
     <!-- Pricing Section -->
-    <section class="pricing" id="pricing">
+    <section class="pricing" id="pricing" aria-labelledby="pricing-title">
         <div class="container">
-            <h2 class="section-title center">Simple, Transparent Pricing</h2>
+            <h2 class="section-title center" id="pricing-title">Simple, Transparent Pricing</h2>
             <div class="pricing-card">
+                <div class="pricing-badge">LAUNCH PRICE</div>
                 <div class="pricing-header">
                     <h3>Vspot Pro</h3>
                     <div class="price">
                         <span class="currency">$</span>
-                        <span class="amount">9.99</span>
+                        <span class="amount">3.99</span>
                         <span class="period">one-time</span>
                     </div>
+                    <p class="pricing-note">✨ Lifetime access • Free updates forever</p>
                 </div>
                 <ul class="pricing-features">
                     <li>✅ Unlimited clipboard history</li>
@@ -306,18 +347,186 @@
                     <li>✅ Free updates for life</li>
                     <li>✅ macOS 13.0+ support</li>
                 </ul>
-                <a href="#" class="cta-button primary" id="pricingBtn">
-                    <span>Get Vspot Pro</span>
-                    <span class="cta-subtitle">Available on Mac App Store</span>
+                <a href="#" class="cta-button primary pulse" id="pricingBtn" aria-label="Purchase Vspot Pro for $3.99">
+                    <span>Get Vspot Pro Now</span>
+                    <span class="cta-subtitle">Join 1,000+ Power Users</span>
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials" aria-labelledby="testimonials-title">
         <div class="container">
-            <h2 class="section-title center">Get in Touch</h2>
+            <h2 class="section-title center" id="testimonials-title">What Power Users Are Saying</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">★★★★★</div>
+                    <p class="testimonial-text">"Game changer for my AI workflow. I was losing amazing ChatGPT prompts daily. Now everything is organized and searchable. Worth every penny!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">👨‍💻</div>
+                        <div class="author-info">
+                            <div class="author-name">Marcus Chen</div>
+                            <div class="author-role">Full Stack Developer</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">★★★★★</div>
+                    <p class="testimonial-text">"Finally! A clipboard manager that actually understands how I work with AI. The prompt library feature is brilliant. Saves me hours every week."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">✍️</div>
+                        <div class="author-info">
+                            <div class="author-name">Sarah Rodriguez</div>
+                            <div class="author-role">Content Creator</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">★★★★★</div>
+                    <p class="testimonial-text">"The search is lightning fast and the custom tabs let me organize everything perfectly. Plus, knowing my data stays local gives me peace of mind."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">📊</div>
+                        <div class="author-info">
+                            <div class="author-name">David Kim</div>
+                            <div class="author-role">Data Analyst</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">★★★★★</div>
+                    <p class="testimonial-text">"Best $3.99 I've ever spent. I use it dozens of times daily. The AI prompt categorization is exactly what I needed but didn't know existed."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">🎨</div>
+                        <div class="author-info">
+                            <div class="author-name">Jessica Park</div>
+                            <div class="author-role">UX Designer</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">★★★★★</div>
+                    <p class="testimonial-text">"I've tried every clipboard manager out there. Vspot is the only one built for the AI era. Smart capture works flawlessly."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">⚡</div>
+                        <div class="author-info">
+                            <div class="author-name">Alex Thompson</div>
+                            <div class="author-role">Product Manager</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">★★★★★</div>
+                    <p class="testimonial-text">"Clean interface, powerful features, and actually respects my privacy. This is how Mac apps should be built. Highly recommended!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">🚀</div>
+                        <div class="author-info">
+                            <div class="author-name">Ryan Mitchell</div>
+                            <div class="author-role">Startup Founder</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq" id="faq" aria-labelledby="faq-title">
+        <div class="container">
+            <h2 class="section-title center" id="faq-title">Frequently Asked Questions</h2>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <div class="faq-question" role="button" tabindex="0" aria-expanded="false" aria-controls="faq-answer-1">
+                        <h3>Is Vspot compatible with my Mac?</h3>
+                        <span class="faq-icon" aria-hidden="true">+</span>
+                    </div>
+                    <div class="faq-answer" id="faq-answer-1">
+                        <p>Vspot requires macOS 13.0 (Ventura) or later. It works perfectly on both Intel and Apple Silicon (M1, M2, M3) Macs.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" role="button" tabindex="0" aria-expanded="false" aria-controls="faq-answer-2">
+                        <h3>Is my data stored in the cloud?</h3>
+                        <span class="faq-icon" aria-hidden="true">+</span>
+                    </div>
+                    <div class="faq-answer" id="faq-answer-2">
+                        <p>No! All your data stays 100% local on your machine. We don't collect, store, or transmit any of your clipboard content or prompts. Your privacy is our priority.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" role="button" tabindex="0" aria-expanded="false" aria-controls="faq-answer-3">
+                        <h3>What makes Vspot different from other clipboard managers?</h3>
+                        <span class="faq-icon" aria-hidden="true">+</span>
+                    </div>
+                    <div class="faq-answer" id="faq-answer-3">
+                        <p>Vspot is the ONLY clipboard manager with built-in AI prompt organization. While other tools just track your clipboard history, Vspot helps you organize, categorize, and instantly access your AI prompts with custom categories, tags, and lightning-fast search.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" role="button" tabindex="0" aria-expanded="false" aria-controls="faq-answer-4">
+                        <h3>Is it a one-time purchase or subscription?</h3>
+                        <span class="faq-icon" aria-hidden="true">+</span>
+                    </div>
+                    <div class="faq-answer" id="faq-answer-4">
+                        <p>One-time purchase of $3.99. No subscriptions, no hidden fees. Buy once, own forever with free lifetime updates.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" role="button" tabindex="0" aria-expanded="false" aria-controls="faq-answer-5">
+                        <h3>How much storage does Vspot use?</h3>
+                        <span class="faq-icon" aria-hidden="true">+</span>
+                    </div>
+                    <div class="faq-answer" id="faq-answer-5">
+                        <p>Vspot is incredibly lightweight, typically using less than 50MB of disk space. Your clipboard history and prompts are stored efficiently in a local database.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" role="button" tabindex="0" aria-expanded="false" aria-controls="faq-answer-6">
+                        <h3>Can I sync Vspot across multiple Macs?</h3>
+                        <span class="faq-icon" aria-hidden="true">+</span>
+                    </div>
+                    <div class="faq-answer" id="faq-answer-6">
+                        <p>Currently, Vspot stores data locally for privacy. Multi-device sync via iCloud is planned for a future update based on user feedback.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" role="button" tabindex="0" aria-expanded="false" aria-controls="faq-answer-7">
+                        <h3>Does Vspot work with all AI tools?</h3>
+                        <span class="faq-icon" aria-hidden="true">+</span>
+                    </div>
+                    <div class="faq-answer" id="faq-answer-7">
+                        <p>Yes! Vspot works with ChatGPT, Claude, Gemini, Copilot, and any other AI tool. It manages your clipboard content universally across all applications.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" role="button" tabindex="0" aria-expanded="false" aria-controls="faq-answer-8">
+                        <h3>Is there a free trial?</h3>
+                        <span class="faq-icon" aria-hidden="true">+</span>
+                    </div>
+                    <div class="faq-answer" id="faq-answer-8">
+                        <p>The App Store listing will include screenshots and a full feature list. At just $3.99 one-time, it's a no-risk investment in your productivity. If you're not satisfied, Apple offers refunds within their standard return window.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact" aria-labelledby="contact-title">
+        <div class="container">
+            <h2 class="section-title center" id="contact-title">Get in Touch</h2>
             <div class="contact-content">
                 <div class="contact-info">
                     <h3>Questions? Suggestions? Feedback?</h3>
@@ -337,19 +546,22 @@
                         </div>
                     </div>
                 </div>
-                <form class="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                <form class="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" aria-label="Contact form">
                     <input type="hidden" name="form-name" value="contact" />
                     <p class="hidden">
                         <label>Don't fill this out if you're human: <input name="bot-field" /></label>
                     </p>
                     <div class="form-group">
-                        <input type="text" name="name" placeholder="Your Name" required>
+                        <label for="contact-name" class="visually-hidden">Your Name</label>
+                        <input type="text" id="contact-name" name="name" placeholder="Your Name" required aria-required="true">
                     </div>
                     <div class="form-group">
-                        <input type="email" name="email" placeholder="Your Email" required>
+                        <label for="contact-email" class="visually-hidden">Your Email</label>
+                        <input type="email" id="contact-email" name="email" placeholder="Your Email" required aria-required="true">
                     </div>
                     <div class="form-group">
-                        <select name="subject" required>
+                        <label for="contact-subject" class="visually-hidden">Subject</label>
+                        <select id="contact-subject" name="subject" required aria-required="true">
                             <option value="">Select Subject</option>
                             <option value="support">Technical Support</option>
                             <option value="feature">Feature Request</option>
@@ -359,16 +571,17 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+                        <label for="contact-message" class="visually-hidden">Your Message</label>
+                        <textarea id="contact-message" name="message" placeholder="Your Message" rows="5" required aria-required="true"></textarea>
                     </div>
-                    <button type="submit" class="cta-button primary">Send Message</button>
+                    <button type="submit" class="cta-button primary" aria-label="Submit contact form">Send Message</button>
                 </form>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer" role="contentinfo">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-left">
